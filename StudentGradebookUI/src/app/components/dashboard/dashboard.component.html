@@ -1,0 +1,25 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav mode="side" opened="true">
+    <mat-nav-list>
+      <mat-list-item (click)="onSelectOption('dashboard-info')">Dashboard</mat-list-item>
+      <mat-list-item (click)="onSelectOption('gradebook')">Gradebook</mat-list-item>
+      <mat-list-item (click)="onSelectOption('user-profile')">User Profile</mat-list-item>
+      <mat-list-item (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        Logout
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content class="sidebar-content">
+    <mat-toolbar color="primary">
+      Logged as {{ currentUser.Role }} {{ currentUser.userName }}
+    </mat-toolbar>
+    <div class="main-content">
+      <!-- Dynamic content based on selection -->
+      <ng-container *ngIf="selectedOption">
+        <!-- Dynamically create component based on selectedOption -->
+        <ng-template [ngComponentOutlet]="selectedComponent"></ng-template>
+      </ng-container>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

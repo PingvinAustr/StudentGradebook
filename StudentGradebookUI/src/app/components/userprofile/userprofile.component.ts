@@ -1,0 +1,86 @@
+import { Component, OnInit } from '@angular/core';
+import { CurrentUserInfo } from 'src/app/models/currentuserinfo.model';
+import { UserService } from 'src/app/services/user/user-service.service';
+import { GroupService } from 'src/app/services/group/group.service';
+import { Group } from 'src/app/models/group.model';
+import { CafedraService } from 'src/app/services/cafedra/cafedra.service';
+import { Cafedra } from 'src/app/models/cafedra.model';
+import { Discipline } from 'src/app/models/discipline.model';
+import { Assignment } from 'src/app/models/assignment.model';
+
+@Component({
+  selector: 'app-userprofile',
+  templateUrl: './userprofile.component.html',
+  styleUrls: ['./userprofile.component.scss']
+})
+export class UserProfileComponent implements OnInit {
+
+  constructor(private userService: UserService,
+    private groupService: GroupService,
+    private cafedraService: CafedraService) { }
+
+  Role: string;
+  CurrentUser: CurrentUserInfo;
+  Group: Group;
+  Cafedra: Cafedra;
+
+  displayedColumns: string[] = ['name', 'assignments'];
+  disciplines: Discipline[];
+
+  displayedAssignmentsColumns: string[] = ['name', 'grade', 'disciplineName'];
+  assignments: Assignment[];
+
+  ngOnInit(): void {
+    var user = this.userService.getUser();
+    this.CurrentUser = user;
+    console.log(this.CurrentUser);
+    this.DefineRole();
+    this.DefineGroup();
+    (this.Role === 'Teacher') && this.DefineCafedraById(this.CurrentUser['teacher'].cafedraId);
+    this.DefineDisciplines();
+    this.DefineAssignments();
+  }
+
+  DefineRole() {
+    if (this.CurrentUser['role'] === 1) this.Role='Student';
+    else this.Role = 'Teacher'
+  }
+
+  DefineGroup() {
+    if (this.Role === 'Teacher') return;
+    this.groupService.getGroupById(this.CurrentUser['student'].groupId).subscribe({
+      next: (data) => {
+        this.Group = data;
+        this.DefineCafedraById(this.Group.cafedraId);
+        console.log(this.Group);
+      },
+      error: (error) => {
+        console.error('Error fetching group:', error);
+      }
+    });
+  }
+
+  DefineCafedraById(id) {
+    this.cafedraService.getCafedra(id).subscribe({
+      next: (data) => {
+        this.Cafedra = data;
+        console.log(this.Cafedra);
+      },
+      error: (error) => {
+        console.error('Error fetching cafedra:', error);
+      }
+    });
+  }
+
+  DefineDisciplines() {
+    if (this.Role !== 'Teacher') return;
+    this.disciplines = this.CurrentUser['teacher'].disciplines;
+    console.log(this.disciplines);
+  }
+
+  DefineAssignments() {
+    if (this.Role !== 'Student') return;
+    this.assignments = this.CurrentUser['student'].assignments;
+    console.log(this.assignments);
+  }
+}

@@ -1,0 +1,28 @@
+
+
+.sidenav-container {
+    height: 100%;
+    display: flex;
+    box-sizing: border-box;
+}
+
+.mat-sidenav {
+    width: 200px;
+}
+
+.main-content {
+    height: fit-content;
+    padding: 20px;
+    flex-grow: 1;
+}
+
+.logout-button {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.sidebar-content {
+    width: 100%;
+    overflow: hidden;
+}

@@ -1,0 +1,96 @@
+<div *ngIf="Role==='Teacher'">
+Teacher
+    <div class="form-container">
+        <img class="avatarImage" *ngIf="CurrentUser?.teacher.avatarImage" [src]="CurrentUser.teacher.avatarImage" alt="User Avatar">
+        <div class="field-group">
+            <div>First name: {{CurrentUser.teacher.firstName}}</div>
+            <div>Birth date: {{CurrentUser.teacher.birthDate}}</div>
+        </div>
+        <div class="field-group">
+            <div>Middle name: {{CurrentUser.teacher.middleName}}</div>
+            <div>Cafedra: {{Cafedra['name']}}</div>
+        </div>
+        <div class="field-group">
+            <div>Last name: {{CurrentUser.teacher.lastName}}</div>
+            <div>Email: {{CurrentUser.teacher.email}}</div>
+        </div>
+        <div class="field-group">
+            <div></div>
+            <div>Phone: {{CurrentUser.teacher.phone}}</div>
+        </div>
+    </div>
+    
+    <div class="disciplines-table">
+        <table mat-table [dataSource]="disciplines" class="mat-elevation-z8">
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+
+            <!-- Assignments Column -->
+            <ng-container matColumnDef="assignments">
+            <th mat-header-cell *matHeaderCellDef> Assignments </th>
+            <td mat-cell *matCellDef="let element"> {{element.assignments.length}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </div>
+
+</div>
+
+<div *ngIf="Role==='Student'">
+Student
+    <div class="form-container">
+        <img class="avatarImage" *ngIf="CurrentUser?.student.avatarImage" [src]="CurrentUser.student.avatarImage" alt="User Avatar">
+        <div class="field-group">
+            <div>First name: {{CurrentUser.student.firstName}}</div>
+            <div>Birth date: {{CurrentUser.student.birthDate}}</div>
+        </div>
+        <div class="field-group">
+            <div>Middle name: {{CurrentUser.student.middleName}}</div>
+            <div>Group: {{CurrentUser.student.groupId}}</div>
+        </div>
+        <div class="field-group">
+            <div>Last name: {{CurrentUser.student.lastName}}</div>
+            <div>Email: {{CurrentUser.student.email}}</div>
+        </div>
+        <div class="field-group">
+            <div></div>
+            <div>Phone: {{CurrentUser.student.phone}}</div>
+        </div>
+        <div class="field-group">
+            <div>Group: {{Group['name']}}</div>
+            <div>Cafedra: {{Cafedra['name']}}</div>
+        </div>
+    </div>
+
+   <div class="disciplines-table">
+    <table mat-table [dataSource]="assignments" class="mat-elevation-z8">
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+
+        <!-- Grade Column -->
+        <ng-container matColumnDef="grade">
+            <th mat-header-cell *matHeaderCellDef> Grade </th>
+            <td mat-cell *matCellDef="let element"> {{element.grade}} </td>
+        </ng-container>
+
+        <!-- Discipline Name Column -->
+        <ng-container matColumnDef="disciplineName">
+            <th mat-header-cell *matHeaderCellDef> Discipline </th>
+            <td mat-cell *matCellDef="let element"> {{element.discipline?.name}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedAssignmentsColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedAssignmentsColumns;"></tr>
+    </table>
+</div>
+
+</div>

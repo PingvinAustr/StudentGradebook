@@ -1,0 +1,66 @@
+<div class="form-container">
+  <mat-tab-group>
+    <mat-tab label="Student">
+      <form (ngSubmit)="registerStudent()" #studentForm="ngForm">
+        <mat-form-field appearance="fill">
+          <mat-label>Username</mat-label>
+          <input matInput type="text" [(ngModel)]="student.username" name="username" required>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" [(ngModel)]="student.password" name="password" required>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>First Name</mat-label>
+          <input matInput type="text" [(ngModel)]="student.firstName" name="firstName" required>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Middle Name</mat-label>
+          <input matInput type="text" [(ngModel)]="student.middleName" name="middleName" required>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Last Name</mat-label>
+          <input matInput type="text" [(ngModel)]="student.lastName" name="lastName" required>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Group</mat-label>
+          <mat-select [(ngModel)]="student.groupId" name="groupId" required>
+            <mat-option *ngFor="let group of groups" [value]="group.entryId">{{ group.name }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit" [disabled]="!studentForm.valid">Register Student</button>
+      </form>
+    </mat-tab>
+    <mat-tab label="Teacher">
+      <form (ngSubmit)="registerTeacher()" #teacherForm="ngForm">
+        <mat-form-field appearance="fill">
+          <mat-label>Username</mat-label>
+          <input matInput type="text" [(ngModel)]="teacher.username" name="username" required>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" [(ngModel)]="teacher.password" name="password" required>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>First Name</mat-label>
+          <input matInput type="text" [(ngModel)]="teacher.firstName" name="firstName" required>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Middle Name</mat-label>
+          <input matInput type="text" [(ngModel)]="teacher.middleName" name="middleName" required>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Last Name</mat-label>
+          <input matInput type="text" [(ngModel)]="teacher.lastName" name="lastName" required>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Cafedra</mat-label>
+          <mat-select [(ngModel)]="teacher.cafedraId" name="cafedraId" required>
+            <mat-option *ngFor="let cafedra of cafedras" [value]="cafedra.entryId">{{ cafedra.name }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit" [disabled]="!teacherForm.valid">Register Teacher</button>
+      </form>
+    </mat-tab>
+  </mat-tab-group>
+</div>

@@ -1,0 +1,26 @@
+<div class="container">
+  <mat-card class="card-container">
+    <mat-card-header>
+      <mat-card-title>{{ showRegistrationForm ? 'Register' : 'Login' }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <ng-container *ngIf="!showRegistrationForm; else registrationTemplate">
+        <form (ngSubmit)="login()" #loginForm="ngForm">
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Username</mat-label>
+            <input matInput type="text" [(ngModel)]="username" name="username" required>
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" [(ngModel)]="password" name="password" required>
+          </mat-form-field>
+          <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid">Login</button>
+          <button mat-button (click)="toggleForm()">Need to register?</button>
+        </form>
+      </ng-container>
+      <ng-template #registrationTemplate>
+        <app-registration-form (onRegistered)="handleRegistration()"></app-registration-form>
+      </ng-template>
+    </mat-card-content>
+  </mat-card>
+</div>
