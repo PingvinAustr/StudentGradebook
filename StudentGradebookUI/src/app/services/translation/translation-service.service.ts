@@ -7,10 +7,27 @@ import { catchError, map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class TranslationService {
-  private currentLang: string = 'EN';
+  public currentLang: string = 'EN'; // Default language
   private translations: any = {};
 
-  constructor(private http: HttpClient) {}
+  public Languages = [
+    { code: 'EN', label: 'English' },
+    { code: 'UA', label: 'Українська' }
+  ];
+
+  constructor(private http: HttpClient) {
+    this.initializeLanguage();
+  }
+
+  private initializeLanguage(): void {
+    const storedLang = localStorage.getItem('appLang');
+    if (storedLang) {
+      this.currentLang = storedLang;
+      this.loadTranslations(storedLang).subscribe(); // Pre-load translations
+    } else {
+      this.setCurrentLanguage(this.currentLang); // Set default language if none in storage
+    }
+  }
 
   loadTranslations(lang: string): Observable<any> {
     return this.http.get(`/assets/i18n/${lang}.json`).pipe(
@@ -29,7 +46,8 @@ export class TranslationService {
     return this.translations[key] || key;
   }
 
-  setCurrentLanguage(lang: string) {
+  setCurrentLanguage(lang: string): void {
+    localStorage.setItem('appLang', lang);
     this.loadTranslations(lang).subscribe();
   }
 

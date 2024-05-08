@@ -6,6 +6,7 @@ import { UserService } from 'src/app/services/user/user-service.service';
 import { DashboardInfoComponent } from '../dashboard-info/dashboard-info.component';
 import { GradebookComponent } from '../gradebook/gradebook.component';
 import { UserProfileComponent } from '../userprofile/userprofile.component';
+import { TranslationService } from 'src/app/services/translation/translation-service.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,7 +20,8 @@ export class DashboardComponent {
   currentUser: any;
   constructor(
     private authService: AuthService,
-    private userService: UserService
+    private userService: UserService,
+    public translationService: TranslationService
   ) {}
 
    ngOnInit() {
@@ -46,6 +48,10 @@ export class DashboardComponent {
         break;
       }
     }
+  }
+
+  setLanguage(lang: string) {
+    this.translationService.setCurrentLanguage(lang);
   }
 
   logout(): void {
