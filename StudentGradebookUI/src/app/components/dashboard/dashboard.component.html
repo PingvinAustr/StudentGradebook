@@ -4,6 +4,7 @@
       <mat-list-item (click)="onSelectOption('dashboard-info')">{{ 'lblDashboard' | translate }}</mat-list-item>
       <mat-list-item (click)="onSelectOption('gradebook')">{{ 'lblGradebook' | translate }}</mat-list-item>
       <mat-list-item (click)="onSelectOption('user-profile')">{{ 'lblUserProfile' | translate }}</mat-list-item>
+      <mat-list-item (click)="onSelectOption('analytics')">{{ 'lblAnalytics' | translate }}</mat-list-item>
       <mat-form-field appearance="fill">
           <mat-label>{{ 'lblLanguage' | translate }}</mat-label>
           <mat-select [(value)]="translationService.currentLang" (selectionChange)="setLanguage($event.value)">

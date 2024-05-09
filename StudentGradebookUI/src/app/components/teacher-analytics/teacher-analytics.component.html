@@ -1,0 +1,88 @@
+<div>
+  <mat-tab-group mat-stretch-tabs (selectedIndexChange)="onTabChange($event)">
+    <mat-tab label="{{ 'lblAssignmentsQuantity' | translate }}">
+    <div class="filters">
+    <mat-slide-toggle [(ngModel)]="useDateRange" (onChange)="toggleDateUsage()">{{'lblSemestersDateMode' | translate}}</mat-slide-toggle>
+
+    <div *ngIf="useDateRange">
+    <mat-form-field appearance="fill">
+      <mat-label>{{ 'lblDateFrom' | translate }}</mat-label>
+      <input matInput [matDatepicker]="picker1" [(ngModel)]="generalTabDateFrom" [disabled]="!useDateRange">
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>{{ 'lblDateTo' | translate }}</mat-label>
+      <input matInput [matDatepicker]="picker2" [(ngModel)]="generalTabDateTo" [disabled]="!useDateRange">
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
+  </div>
+
+   <div *ngIf="!useDateRange">
+    <mat-form-field appearance="fill">
+      <mat-label>{{'lblSelectYear' | translate}}</mat-label>
+      <mat-select [(ngModel)]="selectedYear">
+        <mat-option *ngFor="let year of availableYears" [value]="year">{{ year }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>{{'lblSelectSemester' | translate}}</mat-label>
+      <mat-select [(ngModel)]="selectedSemester">
+        <mat-option *ngFor="let semester of semesters" [value]="semester.id">{{ semester.name }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+    <mat-form-field appearance="fill">
+      <mat-label>{{ 'lblDisciplines' | translate }}</mat-label>
+      <mat-select [(ngModel)]="generalTabSelectedDisciplines" multiple>
+      <mat-option *ngFor="let discipline of currentTeacherDisciplines" [value]="discipline.entryId">{{ discipline.name }}</mat-option>
+      </mat-select>
+
+    </mat-form-field>
+      <mat-checkbox [(ngModel)]="showOnlyUngradedAssignmentsOnGeneralTab" (onChage)="toggleAssignmentsVisibility()">
+        {{ 'lblShowOnlyUngraded' | translate }}
+     </mat-checkbox>
+
+      <button mat-raised-button color="primary" (click)="loadGeneralTabAssignments()">{{ 'lblApply' | translate }}</button>
+    </div>
+    <div class="chart-container" *ngIf="activeTabIndex === 0">
+      <apx-chart
+        [series]="generalTabChartOptions.series"
+        [chart]="generalTabChartOptions.chart"
+        [xaxis]="generalTabChartOptions.xaxis"
+        [plotOptions]="generalTabChartOptions.plotOptions"
+        [dataLabels]="generalTabChartOptions.dataLabels"
+        [legend]="generalTabChartOptions.legend">
+      </apx-chart>
+    </div>
+    </mat-tab>
+     <mat-tab label="{{ 'lblAverageGradesByDiscipline' | translate }}">
+        <div id="chart" *ngIf="activeTabIndex===1">
+            <apx-chart
+                [series]="horizontalBarChartOptions.series"
+                [chart]="horizontalBarChartOptions.chart"
+                [dataLabels]="horizontalBarChartOptions.dataLabels"
+                [plotOptions]="horizontalBarChartOptions.plotOptions"
+                [xaxis]="horizontalBarChartOptions.xaxis"
+            ></apx-chart>
+            </div>
+    </mat-tab>
+     <mat-tab label="{{ 'lblPercentageOfGradedAssignments' | translate }}">
+        <div *ngIf="activeTabIndex===2">
+            <apx-chart
+                [series]="radialChartOptions.series"
+                [chart]="radialChartOptions.chart"
+                [plotOptions]="radialChartOptions.plotOptions"
+                [labels]="radialChartOptions.labels"
+                [legend]="radialChartOptions.legend"
+                [colors]="radialChartOptions.colors"
+                [responsive]="radialChartOptions.responsive"
+            ></apx-chart>
+        </div>
+     </mat-tab>
+    </mat-tab-group>
+</div>

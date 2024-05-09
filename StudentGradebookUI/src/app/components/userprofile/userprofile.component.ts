@@ -27,7 +27,7 @@ export class UserProfileComponent implements OnInit {
   displayedColumns: string[] = ['name', 'assignments'];
   disciplines: Discipline[];
 
-  displayedAssignmentsColumns: string[] = ['name', 'grade', 'disciplineName'];
+  displayedAssignmentsColumns: string[] = ['name', 'grade', 'disciplineName', 'gradeDate'];
   assignments: Assignment[];
 
   ngOnInit(): void {
@@ -81,6 +81,28 @@ export class UserProfileComponent implements OnInit {
   DefineAssignments() {
     if (this.Role !== 'Student') return;
     this.assignments = this.CurrentUser['student'].assignments;
-    console.log(this.assignments);
+    const assignmentsWithDates = this.CurrentUser['student'].assignments.filter(a => a.gradeDate);
+
+    // Sort assignments by gradeDate, descending (most recent first)
+    assignmentsWithDates.sort((a, b) => {
+      // Convert gradeDate strings to Date objects for comparison
+      const dateA = new Date(a.gradeDate);
+      const dateB = new Date(b.gradeDate);
+      return dateB.getTime() - dateA.getTime(); // Sort in descending order
+    });
+
+    // Select the top 10 most recent entries
+    this.assignments = assignmentsWithDates.slice(0, 10);
+  }
+
+  GetFormattedDate(date: any): string {
+    if (!date) return ''; // Handle null, undefined, or empty date inputs
+
+    const parsedDate = new Date(date);
+    if (!isNaN(parsedDate.getTime())) { // Check if the date is valid
+      return parsedDate.toLocaleDateString('en-GB'); // UK format gives you dd/mm/yyyy
+    } else {
+      return 'Invalid date'; // Or handle as you see fit
+    }
   }
 }

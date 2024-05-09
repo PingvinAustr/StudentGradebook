@@ -20,11 +20,94 @@ namespace StudentGradebookWebAPI.Controllers
             _context = context;
         }
 
-       /* [HttpGet("by-student/{studentId}")]
-        public async Task<ActionResult<IEnumerable<Assignment>>> GetAssignmentsByStudent(int studentId)
+        // GET: api/Assignments/ForStudent/5
+        [HttpGet("ForStudent/{studentId}")]
+        public async Task<ActionResult<IEnumerable<Assignment>>> GetAssignmentsForStudent(int studentId, [FromQuery] DateTime? dateFrom, [FromQuery] DateTime? dateTo, [FromQuery] int[] disciplineIds)
         {
+            var query = _context.Assignments.Where(a => a.StudentId == studentId);
 
-        }*/
+            if (dateFrom.HasValue)
+                query = query.Where(a => a.GradeDate >= dateFrom);
+            if (dateTo.HasValue)
+                query = query.Where(a => a.GradeDate <= dateTo);
+            if (disciplineIds != null && disciplineIds.Length > 0)
+                query = query.Where(a => disciplineIds.Contains(a.DisciplineId));
+
+            return await query.Include(a => a.Discipline).ToListAsync();
+        }
+
+        // GET: api/Assignments/ForStudent/5
+        [HttpGet("AllForStudent/{studentId}")]
+        public async Task<ActionResult<IEnumerable<Assignment>>> GetAllAssignmentsForStudent(int studentId)
+        {
+            var query = _context.Assignments.Where(a => a.StudentId == studentId);
+
+            return await query.Include(a => a.Discipline).ToListAsync();
+        }
+
+        [HttpGet("NotCheckedForStudent/{studentId}")]
+        public async Task<ActionResult<IEnumerable<Assignment>>> GetNotCheckedAssignmentsForStudent(int studentId)
+        {
+            var query = _context.Assignments.Where(a => a.StudentId == studentId && a.GradeDate == null);
+
+            return await query.Include(a => a.Discipline).ToListAsync();
+        }
+
+
+        // GET: api/Assignments/ForTeacher/5
+        [HttpGet("ForTeacher/{teacherId}")]
+        public async Task<ActionResult<IEnumerable<Assignment>>> GetAssignmentsForTeacher(int teacherId, [FromQuery] DateTime? dateFrom, [FromQuery] DateTime? dateTo, [FromQuery] int[] disciplineIds, [FromQuery] bool showOnlyUngraded)
+        {
+            var query = _context.Assignments.Where(a => a.Discipline.TeacherId == teacherId);
+
+            if (showOnlyUngraded)
+            {
+                query = _context.Assignments.Where(a => a.Discipline.TeacherId == teacherId && a.GradeDate == null);
+            } else
+            {
+                if (dateFrom.HasValue)
+                    query = query.Where(a => a.GradeDate >= dateFrom);
+                if (dateTo.HasValue)
+                    query = query.Where(a => a.GradeDate <= dateTo);
+            }
+
+            if (disciplineIds != null && disciplineIds.Length > 0)
+                query = query.Where(a => disciplineIds.Contains(a.DisciplineId));
+
+            return await query.Include(a => a.Discipline).ToListAsync();
+        }
+
+        // GET: api/Assignments/ForTeacher/5
+        [HttpGet("AllForTeacher/{teacherId}")]
+        public async Task<ActionResult<IEnumerable<Assignment>>> GetAllAssignmentsForTeacher(int teacherId)
+        {
+            var query = _context.Assignments.Where(a => a.Discipline.TeacherId == teacherId);
+
+            return await query.Include(a => a.Discipline).ToListAsync();
+        }
+
+
+        // GET: api/Assignments/by-disciplines
+        [HttpGet("by-disciplines")]
+        public async Task<ActionResult<IEnumerable<Assignment>>> GetAssignmentsByDisciplines(int studentId, [FromQuery] List<int> disciplineIds)
+        {
+            if (disciplineIds == null || !disciplineIds.Any())
+            {
+                return BadRequest("Discipline IDs are required");
+            }
+
+            var assignments = await _context.Assignments
+                .Where(a => a.StudentId == studentId && disciplineIds.Contains(a.DisciplineId))
+                .Include(a => a.Discipline)
+                .ToListAsync();
+
+            if (assignments == null || !assignments.Any())
+            {
+                return NotFound("No assignments found for the specified disciplines");
+            }
+
+            return assignments;
+        }
 
         // GET: api/Assignments
         [HttpGet]

@@ -31,7 +31,15 @@ import { UserProfileComponent } from './components/userprofile/userprofile.compo
 import { MatTableModule } from '@angular/material/table';
 import { TranslatePipe } from './pipes/translation/translation-pipe.pipe';
 import { NgApexchartsModule } from 'ng-apexcharts';
-
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { DisciplineService } from './services/disciplines.service';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { AnalyticsComponent } from './components/analytics/analytics.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { TeacherAnalyticsComponent } from './components/teacher-analytics/teacher-analytics.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatPasswordStrengthModule } from "@angular-material-extensions/password-strength";
 
 export function initApp(translationService: TranslationService) {
   return () => {
@@ -45,10 +53,13 @@ export function initApp(translationService: TranslationService) {
     AppComponent,
     LoginComponent,
     RegistrationFormComponent,
+    AnalyticsComponent,
+    TeacherAnalyticsComponent,
     DashboardComponent,
     DashboardInfoComponent,
     GradebookComponent,
     UserProfileComponent,
+    PageNotFoundComponent,
     TranslatePipe
   ],
 
@@ -70,6 +81,11 @@ export function initApp(translationService: TranslationService) {
     MatListModule,
     MatIconModule,
     MatTableModule,
+    MatDatepickerModule,
+    MatSlideToggleModule,
+    MatNativeDateModule,
+    MatPasswordStrengthModule,
+    MatCheckboxModule,
     NgApexchartsModule
   ],
 
@@ -79,6 +95,7 @@ export function initApp(translationService: TranslationService) {
     GroupService,
     TranslationService,
     AssignmentService,
+    DisciplineService,
      { provide: HTTP_INTERCEPTORS, useClass: JWTInterceptorInterceptor, multi: true },
      {
       provide: APP_INITIALIZER,

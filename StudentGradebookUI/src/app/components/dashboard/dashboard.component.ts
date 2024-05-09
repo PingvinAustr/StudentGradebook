@@ -7,6 +7,8 @@ import { DashboardInfoComponent } from '../dashboard-info/dashboard-info.compone
 import { GradebookComponent } from '../gradebook/gradebook.component';
 import { UserProfileComponent } from '../userprofile/userprofile.component';
 import { TranslationService } from 'src/app/services/translation/translation-service.service';
+import { AnalyticsComponent } from '../analytics/analytics.component';
+import { TeacherAnalyticsComponent } from '../teacher-analytics/teacher-analytics.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -43,8 +45,12 @@ export class DashboardComponent {
         this.selectedComponent = GradebookComponent;
         break;
       }
-       case "user-profile": {
+      case "user-profile": {
         this.selectedComponent = UserProfileComponent;
+        break;
+      }
+      case "analytics": {
+        this.selectedComponent = this.currentUser['role'] === 1 ? AnalyticsComponent : TeacherAnalyticsComponent;
         break;
       }
     }
