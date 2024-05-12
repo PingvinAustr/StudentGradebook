@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using StudentGradebookWebAPI.Database;
 
 namespace StudentGradebookWebAPI.Controllers
@@ -13,11 +14,13 @@ namespace StudentGradebookWebAPI.Controllers
     [ApiController]
     public class AssignmentsController : ControllerBase
     {
+        private readonly IMemoryCache _memoryCache;
         private readonly StudentGradebookContext _context;
 
-        public AssignmentsController(StudentGradebookContext context)
+        public AssignmentsController(StudentGradebookContext context, IMemoryCache memoryCache)
         {
             _context = context;
+            _memoryCache = memoryCache;
         }
 
         // GET: api/Assignments/ForStudent/5
@@ -158,7 +161,19 @@ namespace StudentGradebookWebAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Assignment>>> GetAssignments()
         {
-            return await _context.Assignments.ToListAsync();
+            const string cacheKey = "AssignmentsList";
+            if (!_memoryCache.TryGetValue(cacheKey, out List<Assignment> cachedData))
+            {
+                cachedData = await _context.Assignments.ToListAsync();
+                var cacheExpiryOptions = new MemoryCacheEntryOptions
+                {
+                    AbsoluteExpiration = DateTime.Now.AddMinutes(5),
+                    Priority = CacheItemPriority.High,
+                    SlidingExpiration = TimeSpan.FromMinutes(2)
+                };
+                _memoryCache.Set(cacheKey, cachedData, cacheExpiryOptions);
+            }
+            return Ok(cachedData);
         }
 
         // GET: api/Assignments/5

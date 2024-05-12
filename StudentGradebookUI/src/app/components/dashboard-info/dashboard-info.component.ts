@@ -13,7 +13,7 @@ import {
   ApexNoData
 } from "ng-apexcharts";
 import { UserService } from 'src/app/services/user/user-service.service';
-import { DisciplineService } from 'src/app/services/disciplines.service';
+import { DisciplineService } from 'src/app/services/disciplines/disciplines.service';
 import { TranslationService } from 'src/app/services/translation/translation-service.service';
 import { Assignment } from 'src/app/models/assignment.model';
 import { ChartOptions, DonutChartOptions, TimeLineChartOptions } from 'src/assets/charts.options';

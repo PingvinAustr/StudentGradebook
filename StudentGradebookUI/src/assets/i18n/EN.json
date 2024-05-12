@@ -101,5 +101,8 @@
   "lblDebtsReturning": "Liquidation of academic debt",
   "lblBeforeDiplomaPractice": "Pre-diploma internship",
   "lblDiplomaPreparation": "Preparation for the defense of qualification work",
-  "lblDiplomaProtection": "Defense of qualification work"
+  "lblDiplomaProtection": "Defense of qualification work",
+  "lblUnexpectedError": "Unexpected error",
+  "lblHideDetails": "Hide Details",
+  "lblShowDetails": "Show Details"
 }

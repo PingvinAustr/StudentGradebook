@@ -23,7 +23,7 @@ import {
 import { Assignment } from 'src/app/models/assignment.model';
 import { UserService } from 'src/app/services/user/user-service.service';
 import { Discipline } from 'src/app/models/discipline.model';
-import { DisciplineService } from 'src/app/services/disciplines.service';
+import { DisciplineService } from 'src/app/services/disciplines/disciplines.service';
 import { TranslationService } from 'src/app/services/translation/translation-service.service';
 import { BarChartOptions, ChartOptions, HeatMapOptions, PolarChartOptions } from 'src/assets/charts.options';
 

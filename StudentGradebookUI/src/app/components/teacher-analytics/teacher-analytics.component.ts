@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Assignment } from 'src/app/models/assignment.model';
 import { Discipline } from 'src/app/models/discipline.model';
 import { AssignmentService } from 'src/app/services/assignments/assignment-service.service';
-import { DisciplineService } from 'src/app/services/disciplines.service';
+import { DisciplineService } from 'src/app/services/disciplines/disciplines.service';
 import { TranslationService } from 'src/app/services/translation/translation-service.service';
 import { UserService } from 'src/app/services/user/user-service.service';
 import { BarChartOptions, ChartOptions, HeatMapOptions, HorizontalBarChartOptions, PolarChartOptions, RadialChartOptions } from 'src/assets/charts.options';

@@ -101,5 +101,8 @@
   "lblDebtsReturning": "Ліквідація академ. заборгованості",
   "lblBeforeDiplomaPractice": "Переддипломна практика",
   "lblDiplomaPreparation": "Підготовка до захисту кваліфікаційної роботи",
-  "lblDiplomaProtection": "Захист кваліфікаційної роботи"
+  "lblDiplomaProtection": "Захист кваліфікаційної роботи",
+  "lblUnexpectedError": "Неочікувана помилка",
+  "lblHideDetails": "Приховати подробиці",
+  "lblShowDetails": "Показати подробиці"
 }

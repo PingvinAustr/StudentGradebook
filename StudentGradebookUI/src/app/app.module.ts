@@ -32,7 +32,7 @@ import { MatTableModule } from '@angular/material/table';
 import { TranslatePipe } from './pipes/translation/translation-pipe.pipe';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { DisciplineService } from './services/disciplines.service';
+import { DisciplineService } from './services/disciplines/disciplines.service';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { AnalyticsComponent } from './components/analytics/analytics.component';
@@ -42,6 +42,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatPasswordStrengthModule } from "@angular-material-extensions/password-strength";
 import { DashboardInfoTeacherComponent } from './dashboard-info-teacher/dashboard-info-teacher.component';
 import { SemesterScheduleServiceService } from './services/semester-control/semester-schedule-service.service';
+import { SignalRService } from './services/signal-r/signal-r.service';
+import { ErrorPageComponent } from './components/error/error-page.component';
+import { ErrorHandlingService } from './services/error-handling/error-handling.service';
 
 export function initApp(translationService: TranslationService) {
   return () => {
@@ -63,6 +66,7 @@ export function initApp(translationService: TranslationService) {
     GradebookComponent,
     UserProfileComponent,
     PageNotFoundComponent,
+    ErrorPageComponent,
     TranslatePipe
   ],
 
@@ -99,6 +103,8 @@ export function initApp(translationService: TranslationService) {
     TranslationService,
     AssignmentService,
     DisciplineService,
+    SignalRService,
+    ErrorHandlingService,
     SemesterScheduleServiceService,
      { provide: HTTP_INTERCEPTORS, useClass: JWTInterceptorInterceptor, multi: true },
      {

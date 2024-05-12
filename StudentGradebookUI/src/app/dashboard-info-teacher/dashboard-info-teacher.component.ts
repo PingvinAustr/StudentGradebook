@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AssignmentService } from '../services/assignments/assignment-service.service';
-import { DisciplineService } from '../services/disciplines.service';
+import { DisciplineService } from '../services/disciplines/disciplines.service';
 import { TranslationService } from '../services/translation/translation-service.service';
 import { UserService } from '../services/user/user-service.service';
 import { Assignment } from '../models/assignment.model';
