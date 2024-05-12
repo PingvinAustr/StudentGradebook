@@ -14,7 +14,7 @@ mat-card-header {
 
 .main-cards-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
 
 .show-more-button-container {
@@ -24,6 +24,7 @@ mat-card-header {
     justify-content: center;
 }
 
-.discipline-title-column, .assignment-title-column {
+.discipline-title-column,
+.assignment-title-column {
     width: 200px;
 }

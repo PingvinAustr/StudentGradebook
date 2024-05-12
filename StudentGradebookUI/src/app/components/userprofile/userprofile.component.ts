@@ -7,6 +7,9 @@ import { CafedraService } from 'src/app/services/cafedra/cafedra.service';
 import { Cafedra } from 'src/app/models/cafedra.model';
 import { Discipline } from 'src/app/models/discipline.model';
 import { Assignment } from 'src/app/models/assignment.model';
+import { AssignmentService } from 'src/app/services/assignments/assignment-service.service';
+import { HorizontalBarChartOptions } from 'src/assets/charts.options';
+import { TranslationService } from 'src/app/services/translation/translation-service.service';
 
 @Component({
   selector: 'app-userprofile',
@@ -17,7 +20,9 @@ export class UserProfileComponent implements OnInit {
 
   constructor(private userService: UserService,
     private groupService: GroupService,
-    private cafedraService: CafedraService) { }
+    private cafedraService: CafedraService,
+    private assignmentService: AssignmentService,
+    private translationService: TranslationService) { }
 
   Role: string;
   CurrentUser: CurrentUserInfo;
@@ -39,6 +44,63 @@ export class UserProfileComponent implements OnInit {
     (this.Role === 'Teacher') && this.DefineCafedraById(this.CurrentUser['teacher'].cafedraId);
     this.DefineDisciplines();
     this.DefineAssignments();
+    this.DefineAvgStudentGrades();
+  }
+
+  horizontalBarChartOptions: Partial<HorizontalBarChartOptions>;
+  DefineAvgStudentGrades() {
+    var user = this.userService.getUser();
+    let allAssignmentsForStudent: Assignment[];
+    if (user['role'] !== 1) return;
+    this.assignmentService.getAllAssignmentsForStudent(user['student']['entryId'])
+    .subscribe(data => {
+      allAssignmentsForStudent = data;
+      console.log(data);
+      this.InitStudentChart(allAssignmentsForStudent);
+    });
+  }
+
+  InitStudentChart(assignments) {
+    let disciplineGrades = {};
+    
+    assignments.forEach(assignment => {
+      const { discipline, grade } = assignment;
+      if (!disciplineGrades[discipline.name]) {
+        disciplineGrades[discipline.name] = { total: 0, count: 0 };
+      }
+      if (assignment.gradeDate) {
+        disciplineGrades[discipline.name].total += grade;
+        disciplineGrades[discipline.name].count++;
+      }
+    });
+
+    const categories = Object.keys(disciplineGrades);
+    const data = categories.map(name => Math.round(disciplineGrades[name].total / disciplineGrades[name].count));
+
+
+    this.horizontalBarChartOptions = {
+      series: [
+        {
+          name: this.translationService.translate('lblAverageGrade'),
+          data: data
+        }
+      ],
+      chart: {
+        type: "bar",
+        height: 350
+      },
+      plotOptions: {
+        bar: {
+          horizontal: true
+        }
+      },
+      dataLabels: {
+        enabled: false
+      },
+      xaxis: {
+        categories: categories
+      }
+    };
   }
 
   DefineRole() {

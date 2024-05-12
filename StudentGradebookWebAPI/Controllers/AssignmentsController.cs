@@ -36,6 +36,32 @@ namespace StudentGradebookWebAPI.Controllers
             return await query.Include(a => a.Discipline).ToListAsync();
         }
 
+        [HttpGet("RecentGradesForStudent/{studentId}")]
+        public async Task<ActionResult<IEnumerable<Assignment>>> GetRecentGradesForStudent(int studentId)
+        {
+            var query = _context.Assignments.Where(a => a.StudentId == studentId && a.GradeDate != null).OrderByDescending(x => x.GradeDate);
+
+            return await query.Include(a => a.Discipline).ToListAsync();
+        }
+
+        [HttpGet("DueDateThisWeekForStudent/{studentId}")]
+        public async Task<ActionResult<IEnumerable<Assignment>>> GetDueDateThisWeekAssignmentsForStudent(int studentId)
+        {
+            var currentDate = DateTime.Today;
+            var weekStart = currentDate.AddDays(-(int)currentDate.DayOfWeek + (int)DayOfWeek.Monday);
+            var weekEnd = weekStart.AddDays(7);
+
+            var assignmentsThisWeek = await _context.Assignments
+                .Where(a => a.StudentId == studentId &&
+                            a.DueDate >= weekStart &&
+                            a.DueDate < weekEnd)
+                .OrderBy(x => x.DueDate)
+                .Include(a => a.Discipline)
+                .ToListAsync();
+
+            return assignmentsThisWeek;
+        }
+
         // GET: api/Assignments/ForStudent/5
         [HttpGet("AllForStudent/{studentId}")]
         public async Task<ActionResult<IEnumerable<Assignment>>> GetAllAssignmentsForStudent(int studentId)
@@ -63,7 +89,8 @@ namespace StudentGradebookWebAPI.Controllers
             if (showOnlyUngraded)
             {
                 query = _context.Assignments.Where(a => a.Discipline.TeacherId == teacherId && a.GradeDate == null);
-            } else
+            }
+            else
             {
                 if (dateFrom.HasValue)
                     query = query.Where(a => a.GradeDate >= dateFrom);
@@ -84,6 +111,24 @@ namespace StudentGradebookWebAPI.Controllers
             var query = _context.Assignments.Where(a => a.Discipline.TeacherId == teacherId);
 
             return await query.Include(a => a.Discipline).ToListAsync();
+        }
+
+        // GET: api/Assignments/UngradedForTeacher/5
+        [HttpGet("UngradedForTeacher/{teacherId}")]
+        public async Task<ActionResult<IEnumerable<Assignment>>> GetUngradedAssignmentsForTeacher(int teacherId)
+        {
+            var query = _context.Assignments.Where(a => a.Discipline.TeacherId == teacherId && a.GradeDate == null).Take(20);
+
+            return await query.Include(a => a.Discipline).Include(x => x.Student).Include(x => x.Student.Group).ToListAsync();
+        }
+
+        // GET: api/Assignments/RecentCheckedGradesByTeacher/5
+        [HttpGet("RecentCheckedGradesByTeacher/{teacherId}")]
+        public async Task<ActionResult<IEnumerable<Assignment>>> GetRecentCheckedGradesByTeacher(int teacherId)
+        {
+            var query = _context.Assignments.Where(a => a.Discipline.TeacherId == teacherId && a.GradeDate != null).Take(20);
+
+            return await query.Include(a => a.Discipline).Include(x => x.Student).Include(x => x.Student.Group).OrderByDescending(x => x.GradeDate).ToListAsync();
         }
 
 

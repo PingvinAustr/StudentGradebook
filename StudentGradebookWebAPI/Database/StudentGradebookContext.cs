@@ -23,6 +23,12 @@ public partial class StudentGradebookContext : DbContext
 
     public virtual DbSet<Group> Groups { get; set; }
 
+    public virtual DbSet<SemesterControlSchedule> SemesterControlSchedules { get; set; }
+
+    public virtual DbSet<SemesterControlType> SemesterControlTypes { get; set; }
+
+    public virtual DbSet<Status> Statuses { get; set; }
+
     public virtual DbSet<Student> Students { get; set; }
 
     public virtual DbSet<Teacher> Teachers { get; set; }
@@ -31,7 +37,7 @@ public partial class StudentGradebookContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=LAPTOP-77MT8LVK;Database=StudentGradebook;Trusted_Connection=True;TrustServerCertificate=True;");
+        => optionsBuilder.UseSqlServer("Server= LAPTOP-77MT8LVK; Database=StudentGradebook; Trusted_Connection=True; TrustServerCertificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -41,14 +47,20 @@ public partial class StudentGradebookContext : DbContext
 
             entity.Property(e => e.EntryId).HasColumnName("EntryID");
             entity.Property(e => e.DisciplineId).HasColumnName("DisciplineID");
+            entity.Property(e => e.DueDate).HasColumnType("datetime");
             entity.Property(e => e.GradeDate).HasColumnType("datetime");
             entity.Property(e => e.Name).HasMaxLength(200);
+            entity.Property(e => e.StatusId).HasColumnName("StatusID");
             entity.Property(e => e.StudentId).HasColumnName("StudentID");
 
             entity.HasOne(d => d.Discipline).WithMany(p => p.Assignments)
                 .HasForeignKey(d => d.DisciplineId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Assignmen__Disci__46E78A0C");
+
+            entity.HasOne(d => d.Status).WithMany(p => p.Assignments)
+                .HasForeignKey(d => d.StatusId)
+                .HasConstraintName("FK_Assignments_Statuses");
 
             entity.HasOne(d => d.Student).WithMany(p => p.Assignments)
                 .HasForeignKey(d => d.StudentId)
@@ -89,6 +101,43 @@ public partial class StudentGradebookContext : DbContext
             entity.HasOne(d => d.Cafedra).WithMany(p => p.Groups)
                 .HasForeignKey(d => d.CafedraId)
                 .HasConstraintName("FK__Groups__CafedraI__25869641");
+        });
+
+        modelBuilder.Entity<SemesterControlSchedule>(entity =>
+        {
+            entity.HasKey(e => e.EntryId).HasName("PK__Semester__F57BD2D76BCB447A");
+
+            entity.ToTable("SemesterControlSchedule");
+
+            entity.Property(e => e.EntryId).HasColumnName("EntryID");
+            entity.Property(e => e.ControlTypeId).HasColumnName("ControlTypeID");
+            entity.Property(e => e.GroupId).HasColumnName("GroupID");
+
+            entity.HasOne(d => d.ControlType).WithMany(p => p.SemesterControlSchedules)
+                .HasForeignKey(d => d.ControlTypeId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__SemesterC__Contr__05D8E0BE");
+
+            entity.HasOne(d => d.Group).WithMany(p => p.SemesterControlSchedules)
+                .HasForeignKey(d => d.GroupId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__SemesterC__Group__04E4BC85");
+        });
+
+        modelBuilder.Entity<SemesterControlType>(entity =>
+        {
+            entity.HasKey(e => e.EntryId).HasName("PK__Semester__F57BD2D7AD0629BF");
+
+            entity.Property(e => e.EntryId).HasColumnName("EntryID");
+            entity.Property(e => e.Name).HasMaxLength(200);
+        });
+
+        modelBuilder.Entity<Status>(entity =>
+        {
+            entity.HasKey(e => e.EntryId);
+
+            entity.Property(e => e.EntryId).HasColumnName("EntryID");
+            entity.Property(e => e.Name).HasMaxLength(100);
         });
 
         modelBuilder.Entity<Student>(entity =>

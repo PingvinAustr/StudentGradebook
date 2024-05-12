@@ -24,7 +24,7 @@ namespace StudentGradebookWebAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Discipline>>> GetDisciplines()
         {
-            return await _context.Disciplines.Include(x=>x.Assignments).ToListAsync();
+            return await _context.Disciplines.Include(x => x.Assignments).ToListAsync();
         }
 
         [HttpGet("ByTeacher/{teacherID}")]

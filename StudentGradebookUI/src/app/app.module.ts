@@ -40,6 +40,8 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { TeacherAnalyticsComponent } from './components/teacher-analytics/teacher-analytics.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatPasswordStrengthModule } from "@angular-material-extensions/password-strength";
+import { DashboardInfoTeacherComponent } from './dashboard-info-teacher/dashboard-info-teacher.component';
+import { SemesterScheduleServiceService } from './services/semester-control/semester-schedule-service.service';
 
 export function initApp(translationService: TranslationService) {
   return () => {
@@ -57,6 +59,7 @@ export function initApp(translationService: TranslationService) {
     TeacherAnalyticsComponent,
     DashboardComponent,
     DashboardInfoComponent,
+    DashboardInfoTeacherComponent,
     GradebookComponent,
     UserProfileComponent,
     PageNotFoundComponent,
@@ -96,6 +99,7 @@ export function initApp(translationService: TranslationService) {
     TranslationService,
     AssignmentService,
     DisciplineService,
+    SemesterScheduleServiceService,
      { provide: HTTP_INTERCEPTORS, useClass: JWTInterceptorInterceptor, multi: true },
      {
       provide: APP_INITIALIZER,

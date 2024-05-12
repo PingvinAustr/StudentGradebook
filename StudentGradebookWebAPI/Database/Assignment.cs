@@ -17,7 +17,17 @@ public partial class Assignment
 
     public DateTime? GradeDate { get; set; }
 
+    public DateTime? DueDate { get; set; }
+
+    public bool? IsViewedByStudent { get; set; }
+
+    public bool? IsViewedByTeacher { get; set; }
+
+    public int? StatusId { get; set; }
+
     public virtual Discipline Discipline { get; set; } = null!;
+
+    public virtual Status? Status { get; set; }
 
     public virtual Student Student { get; set; } = null!;
 }

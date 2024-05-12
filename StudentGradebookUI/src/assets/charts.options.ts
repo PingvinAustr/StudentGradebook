@@ -63,3 +63,33 @@ export type RadialChartOptions = {
   plotOptions: ApexPlotOptions;
   responsive: ApexResponsive | ApexResponsive[];
 };
+
+export type DonutChartOptions = {
+  series: ApexNonAxisChartSeries;
+  chart: ApexChart;
+  responsive: ApexResponsive[];
+  labels: any;
+  plotOptions: ApexPlotOptions;
+  colors: string[];
+};
+
+export type TeacherChartOptions = {
+  series: ApexAxisChartSeries;
+  chart: ApexChart;
+  xaxis: ApexXAxis;
+  dataLabels: ApexDataLabels;
+  grid: ApexGrid;
+  stroke: ApexStroke;
+  title: ApexTitleSubtitle;
+};
+
+export type TimeLineChartOptions = {
+  series: ApexAxisChartSeries;
+  chart: ApexChart;
+  dataLabels: ApexDataLabels;
+  grid: ApexGrid;
+  yaxis: ApexYAxis;
+  xaxis: ApexXAxis;
+  plotOptions: ApexPlotOptions;
+  tooltip: ApexTooltip;
+};

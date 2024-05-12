@@ -64,6 +64,14 @@
         </div>
     </div>
 
+     <apx-chart
+                [series]="horizontalBarChartOptions.series"
+                [chart]="horizontalBarChartOptions.chart"
+                [dataLabels]="horizontalBarChartOptions.dataLabels"
+                [plotOptions]="horizontalBarChartOptions.plotOptions"
+                [xaxis]="horizontalBarChartOptions.xaxis"
+            ></apx-chart>
+
     <p>{{'lblTenMostRecentGrades' | translate}}</p>
    <div class="disciplines-table">
     <table mat-table [dataSource]="assignments" class="mat-elevation-z8">
