@@ -24,6 +24,7 @@ namespace StudentGradebookWebAPI.Controllers
         }
 
         // GET: api/Assignments/ForStudent/5
+        [Auth]
         [HttpGet("ForStudent/{studentId}")]
         public async Task<ActionResult<IEnumerable<Assignment>>> GetAssignmentsForStudent(int studentId, [FromQuery] DateTime? dateFrom, [FromQuery] DateTime? dateTo, [FromQuery] int[] disciplineIds)
         {
@@ -39,6 +40,7 @@ namespace StudentGradebookWebAPI.Controllers
             return await query.Include(a => a.Discipline).ToListAsync();
         }
 
+        [Auth]
         [HttpGet("RecentGradesForStudent/{studentId}")]
         public async Task<ActionResult<IEnumerable<Assignment>>> GetRecentGradesForStudent(int studentId)
         {
@@ -47,6 +49,7 @@ namespace StudentGradebookWebAPI.Controllers
             return await query.Include(a => a.Discipline).ToListAsync();
         }
 
+        [Auth]
         [HttpGet("DueDateThisWeekForStudent/{studentId}")]
         public async Task<ActionResult<IEnumerable<Assignment>>> GetDueDateThisWeekAssignmentsForStudent(int studentId)
         {
@@ -66,6 +69,7 @@ namespace StudentGradebookWebAPI.Controllers
         }
 
         // GET: api/Assignments/ForStudent/5
+        [Auth]
         [HttpGet("AllForStudent/{studentId}")]
         public async Task<ActionResult<IEnumerable<Assignment>>> GetAllAssignmentsForStudent(int studentId)
         {
@@ -74,6 +78,7 @@ namespace StudentGradebookWebAPI.Controllers
             return await query.Include(a => a.Discipline).ToListAsync();
         }
 
+        [Auth]
         [HttpGet("NotCheckedForStudent/{studentId}")]
         public async Task<ActionResult<IEnumerable<Assignment>>> GetNotCheckedAssignmentsForStudent(int studentId)
         {
@@ -84,6 +89,7 @@ namespace StudentGradebookWebAPI.Controllers
 
 
         // GET: api/Assignments/ForTeacher/5
+        [Auth]
         [HttpGet("ForTeacher/{teacherId}")]
         public async Task<ActionResult<IEnumerable<Assignment>>> GetAssignmentsForTeacher(int teacherId, [FromQuery] DateTime? dateFrom, [FromQuery] DateTime? dateTo, [FromQuery] int[] disciplineIds, [FromQuery] bool showOnlyUngraded)
         {
@@ -108,6 +114,7 @@ namespace StudentGradebookWebAPI.Controllers
         }
 
         // GET: api/Assignments/ForTeacher/5
+        [Auth]
         [HttpGet("AllForTeacher/{teacherId}")]
         public async Task<ActionResult<IEnumerable<Assignment>>> GetAllAssignmentsForTeacher(int teacherId)
         {
@@ -117,6 +124,7 @@ namespace StudentGradebookWebAPI.Controllers
         }
 
         // GET: api/Assignments/UngradedForTeacher/5
+        [Auth]
         [HttpGet("UngradedForTeacher/{teacherId}")]
         public async Task<ActionResult<IEnumerable<Assignment>>> GetUngradedAssignmentsForTeacher(int teacherId)
         {
@@ -126,6 +134,7 @@ namespace StudentGradebookWebAPI.Controllers
         }
 
         // GET: api/Assignments/RecentCheckedGradesByTeacher/5
+        [Auth]
         [HttpGet("RecentCheckedGradesByTeacher/{teacherId}")]
         public async Task<ActionResult<IEnumerable<Assignment>>> GetRecentCheckedGradesByTeacher(int teacherId)
         {
@@ -136,6 +145,7 @@ namespace StudentGradebookWebAPI.Controllers
 
 
         // GET: api/Assignments/by-disciplines
+        [Auth]
         [HttpGet("by-disciplines")]
         public async Task<ActionResult<IEnumerable<Assignment>>> GetAssignmentsByDisciplines(int studentId, [FromQuery] List<int> disciplineIds)
         {
@@ -158,6 +168,7 @@ namespace StudentGradebookWebAPI.Controllers
         }
 
         // GET: api/Assignments
+        [Auth]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Assignment>>> GetAssignments()
         {
@@ -177,6 +188,7 @@ namespace StudentGradebookWebAPI.Controllers
         }
 
         // GET: api/Assignments/5
+        [Auth]
         [HttpGet("{id}")]
         public async Task<ActionResult<Assignment>> GetAssignment(int id)
         {
@@ -192,6 +204,7 @@ namespace StudentGradebookWebAPI.Controllers
 
         // PUT: api/Assignments/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Auth]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAssignment(int id, Assignment assignment)
         {
@@ -223,6 +236,7 @@ namespace StudentGradebookWebAPI.Controllers
 
         // POST: api/Assignments
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Auth]
         [HttpPost]
         public async Task<ActionResult<Assignment>> PostAssignment(Assignment assignment)
         {
@@ -233,6 +247,7 @@ namespace StudentGradebookWebAPI.Controllers
         }
 
         // DELETE: api/Assignments/5
+        [Auth]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAssignment(int id)
         {

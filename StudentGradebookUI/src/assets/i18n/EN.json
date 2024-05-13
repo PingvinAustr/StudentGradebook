@@ -104,5 +104,10 @@
   "lblDiplomaProtection": "Defense of qualification work",
   "lblUnexpectedError": "Unexpected error",
   "lblHideDetails": "Hide Details",
-  "lblShowDetails": "Show Details"
+  "lblShowDetails": "Show Details",
+  "lblDarkMode": "Dark Mode",
+  "lblOPI":"Basics Of Program Engineering",
+  "lblDataProtection": "Data Protection",
+  "lblOOPBasics": "OOP Basics",
+  "lblFunctionalProgramming": "Functional Programming"
 }

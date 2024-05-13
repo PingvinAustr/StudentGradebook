@@ -10,6 +10,7 @@ import { TranslationService } from 'src/app/services/translation/translation-ser
 import { AnalyticsComponent } from '../analytics/analytics.component';
 import { TeacherAnalyticsComponent } from '../teacher-analytics/teacher-analytics.component';
 import { DashboardInfoTeacherComponent } from 'src/app/dashboard-info-teacher/dashboard-info-teacher.component';
+import { ThemeService } from 'src/app/services/theme/theme.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -24,7 +25,8 @@ export class DashboardComponent {
   constructor(
     private authService: AuthService,
     private userService: UserService,
-    public translationService: TranslationService
+    public translationService: TranslationService,
+    public themeService: ThemeService
   ) {}
 
    ngOnInit() {

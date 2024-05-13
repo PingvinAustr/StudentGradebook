@@ -45,6 +45,7 @@ import { SemesterScheduleServiceService } from './services/semester-control/seme
 import { SignalRService } from './services/signal-r/signal-r.service';
 import { ErrorPageComponent } from './components/error/error-page.component';
 import { ErrorHandlingService } from './services/error-handling/error-handling.service';
+import { ThemeService } from './services/theme/theme.service';
 
 export function initApp(translationService: TranslationService) {
   return () => {
@@ -104,6 +105,7 @@ export function initApp(translationService: TranslationService) {
     AssignmentService,
     DisciplineService,
     SignalRService,
+    ThemeService,
     ErrorHandlingService,
     SemesterScheduleServiceService,
      { provide: HTTP_INTERCEPTORS, useClass: JWTInterceptorInterceptor, multi: true },

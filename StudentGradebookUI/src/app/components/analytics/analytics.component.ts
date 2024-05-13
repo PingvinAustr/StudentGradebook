@@ -135,11 +135,11 @@ export class AnalyticsComponent implements OnInit {
   generateHeatMapSeries(): any {
     const studentID = this.userService.getUser()['student'].entryId;
     let seriesArray: any[] = [];
-    console.log(this.disciplines);
+
     // Iterate through each discipline to prepare the data for the heatmap
     this.disciplines.forEach(discipline => {
         let seriesEntry = {
-            name: discipline.name,
+            name: this.translationService.translate(discipline.name),
             data: []
         };
 
@@ -236,8 +236,9 @@ export class AnalyticsComponent implements OnInit {
   }
 
   initNotCheckedAssignmentsChart(): void {
+    const transService = this.translationService;
     const disciplineData = this.notCheckedAssignments.reduce((acc, curr) => {
-      const name = curr.discipline.name;
+      const name = transService.translate(curr.discipline.name);
       acc[name] = (acc[name] || 0) + 1;
       return acc;
     }, {});
@@ -325,9 +326,9 @@ export class AnalyticsComponent implements OnInit {
 
 
  initPolarChart(assignments: any[]): void {
-  console.log(assignments);
+  const transService = this.translationService;
     const disciplineCounts = assignments.reduce((acc, curr) => {
-      const name = curr.discipline.name;
+      const name = transService.translate(curr.discipline.name);
       if (acc[name]) {
         acc[name]++;
       } else {
@@ -366,12 +367,13 @@ export class AnalyticsComponent implements OnInit {
   }
 
 initGeneralGradesChart(): void {
+  const transService = this.translationService;
   const seriesMap = new Map<number, { name: string, data: any[] }>();
   this.generalTabAssignments.forEach(assignment => {
     if (assignment.discipline && assignment.gradeDate) {
       if (!seriesMap.has(assignment.disciplineId)) {
         seriesMap.set(assignment.disciplineId, {
-          name: assignment.discipline.name,
+          name: transService.translate(assignment.discipline.name),
           data: []
         });
       }

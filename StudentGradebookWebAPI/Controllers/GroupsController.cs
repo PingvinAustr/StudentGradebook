@@ -21,6 +21,7 @@ namespace StudentGradebookWebAPI.Controllers
         }
 
         // GET: api/Groups
+        [Auth]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Group>>> GetGroups()
         {
@@ -28,6 +29,7 @@ namespace StudentGradebookWebAPI.Controllers
         }
 
         // GET: api/Groups/5
+        [Auth]
         [HttpGet("{id}")]
         public async Task<ActionResult<Group>> GetGroup(int id)
         {
@@ -43,6 +45,7 @@ namespace StudentGradebookWebAPI.Controllers
 
         // PUT: api/Groups/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Auth]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutGroup(int id, Group @group)
         {
@@ -74,6 +77,7 @@ namespace StudentGradebookWebAPI.Controllers
 
         // POST: api/Groups
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Auth]
         [HttpPost]
         public async Task<ActionResult<Group>> PostGroup(Group @group)
         {
@@ -98,6 +102,7 @@ namespace StudentGradebookWebAPI.Controllers
         }
 
         // DELETE: api/Groups/5
+        [Auth]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteGroup(int id)
         {

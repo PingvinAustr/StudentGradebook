@@ -21,12 +21,14 @@ namespace StudentGradebookWebAPI.Controllers
         }
 
         // GET: api/SemesterControlSchedules
+        [Auth]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<SemesterControlSchedule>>> GetSemesterControlSchedules()
         {
             return await _context.SemesterControlSchedules.ToListAsync();
         }
 
+        [Auth]
         [HttpGet("SemesterScheduleForStudent/{studentId}")]
         public async Task<ActionResult<IEnumerable<SemesterControlSchedule>>> GetSemesterScheduleForStudent(int studentId)
         {
@@ -36,6 +38,7 @@ namespace StudentGradebookWebAPI.Controllers
         }
 
         // GET: api/SemesterControlSchedules/5
+        [Auth]
         [HttpGet("{id}")]
         public async Task<ActionResult<SemesterControlSchedule>> GetSemesterControlSchedule(int id)
         {
@@ -51,6 +54,7 @@ namespace StudentGradebookWebAPI.Controllers
 
         // PUT: api/SemesterControlSchedules/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Auth]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutSemesterControlSchedule(int id, SemesterControlSchedule semesterControlSchedule)
         {
@@ -82,6 +86,7 @@ namespace StudentGradebookWebAPI.Controllers
 
         // POST: api/SemesterControlSchedules
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Auth]
         [HttpPost]
         public async Task<ActionResult<SemesterControlSchedule>> PostSemesterControlSchedule(SemesterControlSchedule semesterControlSchedule)
         {
@@ -92,6 +97,7 @@ namespace StudentGradebookWebAPI.Controllers
         }
 
         // DELETE: api/SemesterControlSchedules/5
+        [Auth]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteSemesterControlSchedule(int id)
         {

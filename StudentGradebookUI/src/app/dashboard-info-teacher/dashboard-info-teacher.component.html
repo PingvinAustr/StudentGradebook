@@ -11,7 +11,7 @@
             <mat-card-content>
                 <div *ngFor="let assignment of visibleUngradedAssignments; let i = index">
                 <div class="assignment" *ngIf="i < visibleUngradedCount">
-                    <span class="discipline-title-column">{{ assignment.discipline.name }}</span>
+                    <span class="discipline-title-column">{{ assignment.discipline.name | translate }}</span>
                     <span class="assignment-title-column">{{ assignment.name }}</span>
                     <span class="assignment-title-column">{{ assignment.student.firstName }} {{assignment.student.lastName}}</span>
                     <span class="assignment-title-column">{{ assignment.student.group.name }}</span>
@@ -37,7 +37,7 @@
             <mat-card-content>
                 <div *ngFor="let assignment of visiblerecentCheckedAssignments; let i = index">
                 <div class="assignment" *ngIf="i < visiblerecentCheckedCount">
-                    <span class="discipline-title-column">{{ assignment.discipline.name }}</span>
+                    <span class="discipline-title-column">{{ assignment.discipline.name | translate }}</span>
                     <span class="assignment-title-column">{{ assignment.name }}</span>
                     <span class="assignment-title-column">{{ assignment.student.firstName }} {{assignment.student.lastName}}</span>
                     <span class="assignment-title-column">{{ assignment.student.group.name }}</span>

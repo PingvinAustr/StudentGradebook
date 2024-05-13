@@ -16,6 +16,7 @@ namespace StudentGradebookWebAPI.Controllers
         }
 
         // GET: api/Cafedra
+        [Auth]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Cafedra>>> GetCafedras()
         {
@@ -23,6 +24,7 @@ namespace StudentGradebookWebAPI.Controllers
         }
 
         // GET: api/Cafedra/5
+        [Auth]
         [HttpGet("{id}")]
         public async Task<ActionResult<Cafedra>> GetCafedra(int id)
         {
@@ -37,6 +39,7 @@ namespace StudentGradebookWebAPI.Controllers
         }
 
         // POST: api/Cafedra
+        [Auth]
         [HttpPost]
         public async Task<ActionResult<Cafedra>> PostCafedra(Cafedra cafedra)
         {
@@ -47,6 +50,7 @@ namespace StudentGradebookWebAPI.Controllers
         }
 
         // PUT: api/Cafedra/5
+        [Auth]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCafedra(int id, Cafedra cafedra)
         {
@@ -77,6 +81,7 @@ namespace StudentGradebookWebAPI.Controllers
         }
 
         // DELETE: api/Cafedra/5
+        [Auth]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCafedra(int id)
         {

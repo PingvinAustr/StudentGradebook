@@ -65,19 +65,19 @@ export class UserProfileComponent implements OnInit {
     
     assignments.forEach(assignment => {
       const { discipline, grade } = assignment;
-      if (!disciplineGrades[discipline.name]) {
-        disciplineGrades[discipline.name] = { total: 0, count: 0 };
+      if (!disciplineGrades[this.translationService.translate(discipline.name)]) {
+        disciplineGrades[this.translationService.translate(discipline.name)] = { total: 0, count: 0 };
       }
       if (assignment.gradeDate) {
-        disciplineGrades[discipline.name].total += grade;
-        disciplineGrades[discipline.name].count++;
+        disciplineGrades[this.translationService.translate(discipline.name)].total += grade;
+        disciplineGrades[this.translationService.translate(discipline.name)].count++;
       }
     });
 
     const categories = Object.keys(disciplineGrades);
     const data = categories.map(name => Math.round(disciplineGrades[name].total / disciplineGrades[name].count));
 
-
+    const transService = this.translationService;
     this.horizontalBarChartOptions = {
       series: [
         {

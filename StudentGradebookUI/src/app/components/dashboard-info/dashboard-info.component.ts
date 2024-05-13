@@ -60,8 +60,6 @@ export class DashboardInfoComponent implements OnInit {
     let monthName = month[now.getMonth()];
 
     const dayOfMonth = now.getDate();
-    console.log(dayOfWeek);
-    console.log(monthName);
     const monthNameLocalized = this.translationService.translate(`lbl${monthName}L`);
     this.formattedDate = `${this.translationService.translate(`lbl${dayOfWeek}`)}, ${dayOfMonth} ${monthNameLocalized}`;
   }

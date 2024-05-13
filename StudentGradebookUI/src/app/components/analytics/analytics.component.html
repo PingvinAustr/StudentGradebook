@@ -39,7 +39,7 @@
     <mat-form-field appearance="fill">
       <mat-label>{{ 'lblDisciplines' | translate }}</mat-label>
       <mat-select [(ngModel)]="generalTabSelectedDisciplines" multiple>
-      <mat-option *ngFor="let discipline of disciplines" [value]="discipline.entryId">{{ discipline.name }}</mat-option>
+      <mat-option *ngFor="let discipline of disciplines" [value]="discipline.entryId">{{ discipline.name | translate }}</mat-option>
       </mat-select>
 
     </mat-form-field>

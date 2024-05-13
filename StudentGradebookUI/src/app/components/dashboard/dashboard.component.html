@@ -13,6 +13,9 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
+        <mat-list-item>
+          <mat-slide-toggle (change)="themeService.toggleTheme()">{{'lblDarkMode' | translate}}</mat-slide-toggle>
+        </mat-list-item>
       <mat-list-item (click)="logout()">
         <mat-icon>logout</mat-icon>
         {{ 'lblLogout' | translate }}

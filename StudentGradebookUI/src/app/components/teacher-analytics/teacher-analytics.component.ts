@@ -67,7 +67,7 @@ export class TeacherAnalyticsComponent {
     initRadialChart() {
       let percentageGradedByDiscipline: { [key: string]: number } = {};
        const disciplineCounts = this.radialChartAssignments.reduce((acc, assignment) => {
-      const disciplineName = assignment.discipline.name;
+      const disciplineName = this.translationService.translate(assignment.discipline.name);
       if (!acc[disciplineName]) {
         acc[disciplineName] = { graded: 0, total: 0 };
       }
@@ -156,15 +156,14 @@ export class TeacherAnalyticsComponent {
     initHorizontalChart() {
       let averageGradesByDiscipline: { [key: string]: number } = {};
       let disciplineNames = this.currentTeacherDisciplines.map(discipline => discipline.name);
-      console.log(this.horizontalTabAssignments);
 
       const gradesSumCount = this.horizontalTabAssignments.reduce((acc, assignment) => {
       if (assignment.gradeDate && assignment.grade !== null) {
-        if (!acc[assignment.discipline.name]) {
-          acc[assignment.discipline.name] = { sum: 0, count: 0 };
+        if (!acc[this.translationService.translate(assignment.discipline.name)]) {
+          acc[this.translationService.translate(assignment.discipline.name)] = { sum: 0, count: 0 };
         }
-        acc[assignment.discipline.name].sum += assignment.grade;
-        acc[assignment.discipline.name].count += 1;
+        acc[this.translationService.translate(assignment.discipline.name)].sum += assignment.grade;
+        acc[this.translationService.translate(assignment.discipline.name)].count += 1;
       }
       return acc;
     }, {} as { [key: string]: { sum: number; count: number } });
@@ -243,7 +242,7 @@ export class TeacherAnalyticsComponent {
 
     initGeneralGradesChart(): void {
     const disciplineData = this.generalTabAssignments.reduce((acc, curr) => {
-      const name = curr.discipline.name;
+      const name =  this.translationService.translate(curr.discipline.name);
       acc[name] = (acc[name] || 0) + 1;
       return acc;
     }, {});

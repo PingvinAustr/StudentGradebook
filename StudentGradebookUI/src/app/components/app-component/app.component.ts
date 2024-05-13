@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CafedraService } from '../../services/cafedra/cafedra.service'; // Adjust the path as necessary
 import { SignalRService } from 'src/app/services/signal-r/signal-r.service';
+import { ThemeService } from 'src/app/services/theme/theme.service';
 
 @Component({
   selector: 'app-root',
@@ -11,12 +12,14 @@ export class AppComponent implements OnInit {
   title = 'StudentGradebookUI';
 
   constructor(private cafedraService: CafedraService,
-    private signalRService:SignalRService
+    private signalRService: SignalRService,
+    private themeService: ThemeService
   ) { }
 
   ngOnInit() {
     this.getCafedras();
     setInterval(()=>  this.colorTrace("Connected", "green"), 30000);
+    this.themeService.loadTheme();
     //this.initSignalR();
   }
 

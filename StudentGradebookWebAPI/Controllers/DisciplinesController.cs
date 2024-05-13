@@ -22,11 +22,13 @@ namespace StudentGradebookWebAPI.Controllers
 
         // GET: api/Disciplines
         [HttpGet]
+        [Auth]
         public async Task<ActionResult<IEnumerable<Discipline>>> GetDisciplines()
         {
             return await _context.Disciplines.Include(x => x.Assignments).ToListAsync();
         }
 
+        [Auth]
         [HttpGet("ByTeacher/{teacherID}")]
         public async Task<ActionResult<IEnumerable<Discipline>>> GetAssignmentsForStudent(int teacherID)
         {
@@ -34,6 +36,7 @@ namespace StudentGradebookWebAPI.Controllers
         }
 
         // GET: api/Disciplines/5
+        [Auth]
         [HttpGet("{id}")]
         public async Task<ActionResult<Discipline>> GetDiscipline(int id)
         {
@@ -49,6 +52,7 @@ namespace StudentGradebookWebAPI.Controllers
 
         // PUT: api/Disciplines/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Auth]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutDiscipline(int id, Discipline discipline)
         {
@@ -80,6 +84,7 @@ namespace StudentGradebookWebAPI.Controllers
 
         // POST: api/Disciplines
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Auth]
         [HttpPost]
         public async Task<ActionResult<Discipline>> PostDiscipline(Discipline discipline)
         {
@@ -90,6 +95,7 @@ namespace StudentGradebookWebAPI.Controllers
         }
 
         // DELETE: api/Disciplines/5
+        [Auth]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteDiscipline(int id)
         {

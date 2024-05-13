@@ -104,5 +104,10 @@
   "lblDiplomaProtection": "Захист кваліфікаційної роботи",
   "lblUnexpectedError": "Неочікувана помилка",
   "lblHideDetails": "Приховати подробиці",
-  "lblShowDetails": "Показати подробиці"
+  "lblShowDetails": "Показати подробиці",
+  "lblDarkMode": "Нічна тема",
+  "lblOPI":"Основи Програмної Інженерії",
+  "lblDataProtection": "Захист Даних",
+  "lblOOPBasics": "Основи ООП",
+  "lblFunctionalProgramming": "Функціональне Програмування"
 }
