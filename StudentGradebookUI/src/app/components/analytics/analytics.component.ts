@@ -103,17 +103,11 @@ export class AnalyticsComponent implements OnInit {
     const formattedDateFrom = this.generalTabDateFrom.toISOString();
     const formattedDateTo = this.generalTabDateTo.toISOString();
 
-    console.log(formattedDateFrom);
-    console.log(formattedDateTo);
-    console.log(studentID);
-    console.log(this.generalTabSelectedDisciplines);
-
     this.assignmentService.getAssignmentsForStudent(studentID, {
       dateFrom: formattedDateFrom,
       dateTo: formattedDateTo,
       disciplineIds: this.generalTabSelectedDisciplines
     }).subscribe(data => {
-      console.log(data);
       this.generalTabAssignments = data;
       this.initGeneralGradesChart();
     });
@@ -160,7 +154,6 @@ export class AnalyticsComponent implements OnInit {
         }
     });
 
-    console.log(seriesArray);
     return seriesArray;
 }
 

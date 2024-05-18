@@ -1,24 +1,152 @@
-.container {
-    width: 100%;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+::ng-deep .mdc-list-item__primary-text {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: row;
     height: 100%;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 100%;
+
+    .main-container-item {
+        height: 100%;
+    }
+
+    .main-container-item:first-child {
+        width: 58%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .main-container-item:last-child {
+        width: 42%;
+        img {
+            height: 100%;
+            width: 100%;
+        }
+    }
 }
 
-.card-container {
-    height: 50%;
-    width: 50%;
-}
-
-mat-card-header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-form {
+.form-wrap-container {
+    width: 73%;
+    height: 71%;
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 35px;
+    padding-top:20%;
 }
+
+.form-title {
+    width: 100%;
+}
+
+.form-title {
+    //font-family: 'NoirPro', sans-serif;
+    color: #2783B7;
+    font-size: 36px;
+    font-weight: 400;
+}
+
+.login-form {
+    width: 589px;
+    padding: 30px;
+    height: 315px;
+
+    box-shadow: -5px 13px 29px 0px rgba(218, 225, 231, 0.98) !important;
+    // box-shadow: -18px 50px 54px 0px rgba(218, 225, 231, 0.85) !important;
+    // box-shadow: -41px 113px 72px 0px rgba(218, 225, 231, 0.5) !important;
+    // box-shadow: -74px 201px 86px 0px rgba(218, 225, 231, 0.15) !important;
+    // box-shadow: -115px 314px 94px 0px rgba(218, 225, 231, 0.02) !important;
+}
+
+.enter-data {
+    font-size: 16px;
+    font-family: "Montserrat", sans-serif !important;
+}
+
+.form-login-inner {
+    margin-top: 23px;
+    display: flex;
+    flex-direction: column;
+    gap: 23px;
+}
+
+.custom-input-width {
+    width: 452px;
+    border: 1px solid #E6E6E6;
+    border-radius: 5px;
+}
+
+::ng-deep .mat-mdc-form-field-bottom-align {
+    display: none !important;
+}
+
+.buttons-container {
+    color: #19597D;
+    gap: 25px;
+    display: flex;
+    flex-direction: row;
+}
+
+.login-button {
+    width: 173px;
+    height: 58px;
+    font-family: "Montserrat", sans-serif !important;
+    font-weight: 500;
+    border-radius: 5px;
+}
+
+.mat-mdc-raised-button.mat-primary {
+    //background: #1D95D9;
+    --mdc-protected-button-container-color: #1D95D9;
+}
+
+.register-suggestion {
+    gap: 5px;
+    font-family: "Montserrat", sans-serif !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.register-move-button {
+    text-decoration: underline;
+}
+
+.register-move-button:hover {
+    cursor: pointer;
+}
+
+// .container {
+//     width: 100%;
+//     height: 100%;
+//     overflow: hidden;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+// }
+
+// .card-container {
+//     height: 50%;
+//     width: 50%;
+// }
+
+// mat-card-header {
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+// }
+
+// form {
+//     display: flex;
+//     flex-direction: column;
+// }
+

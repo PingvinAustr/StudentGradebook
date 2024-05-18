@@ -24,7 +24,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
-import { JWTInterceptorInterceptor } from './interceptors/jwtinterceptor.interceptor';
+import { JWTInterceptorInterceptor } from './interceptors/jwt/jwtinterceptor.interceptor';
 import { DashboardInfoComponent } from './components/dashboard-info/dashboard-info.component';
 import { GradebookComponent } from './components/gradebook/gradebook.component';
 import { UserProfileComponent } from './components/userprofile/userprofile.component';
@@ -40,12 +40,16 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { TeacherAnalyticsComponent } from './components/teacher-analytics/teacher-analytics.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatPasswordStrengthModule } from "@angular-material-extensions/password-strength";
-import { DashboardInfoTeacherComponent } from './dashboard-info-teacher/dashboard-info-teacher.component';
+import { DashboardInfoTeacherComponent } from './components/dashboard-info-teacher/dashboard-info-teacher.component';
 import { SemesterScheduleServiceService } from './services/semester-control/semester-schedule-service.service';
 import { SignalRService } from './services/signal-r/signal-r.service';
 import { ErrorPageComponent } from './components/error/error-page.component';
 import { ErrorHandlingService } from './services/error-handling/error-handling.service';
 import { ThemeService } from './services/theme/theme.service';
+import { LoadingService } from './services/loading/loading.service';
+import { LoadingInterceptor } from './interceptors/loading/loading.interceptor';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 export function initApp(translationService: TranslationService) {
   return () => {
@@ -94,13 +98,16 @@ export function initApp(translationService: TranslationService) {
     MatNativeDateModule,
     MatPasswordStrengthModule,
     MatCheckboxModule,
-    NgApexchartsModule
+    NgApexchartsModule,
+    MatProgressSpinnerModule,
+    MatProgressBarModule
   ],
 
   providers: [
     CafedraService,
     AuthService,
     GroupService,
+    LoadingService,
     TranslationService,
     AssignmentService,
     DisciplineService,
@@ -109,6 +116,7 @@ export function initApp(translationService: TranslationService) {
     ErrorHandlingService,
     SemesterScheduleServiceService,
      { provide: HTTP_INTERCEPTORS, useClass: JWTInterceptorInterceptor, multi: true },
+     { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
      {
       provide: APP_INITIALIZER,
       useFactory: initApp,

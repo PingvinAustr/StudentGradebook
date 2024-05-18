@@ -38,7 +38,6 @@ export class UserProfileComponent implements OnInit {
   ngOnInit(): void {
     var user = this.userService.getUser();
     this.CurrentUser = user;
-    console.log(this.CurrentUser);
     this.DefineRole();
     this.DefineGroup();
     (this.Role === 'Teacher') && this.DefineCafedraById(this.CurrentUser['teacher'].cafedraId);
@@ -55,7 +54,6 @@ export class UserProfileComponent implements OnInit {
     this.assignmentService.getAllAssignmentsForStudent(user['student']['entryId'])
     .subscribe(data => {
       allAssignmentsForStudent = data;
-      console.log(data);
       this.InitStudentChart(allAssignmentsForStudent);
     });
   }
@@ -114,7 +112,6 @@ export class UserProfileComponent implements OnInit {
       next: (data) => {
         this.Group = data;
         this.DefineCafedraById(this.Group.cafedraId);
-        console.log(this.Group);
       },
       error: (error) => {
         console.error('Error fetching group:', error);
@@ -126,7 +123,6 @@ export class UserProfileComponent implements OnInit {
     this.cafedraService.getCafedra(id).subscribe({
       next: (data) => {
         this.Cafedra = data;
-        console.log(this.Cafedra);
       },
       error: (error) => {
         console.error('Error fetching cafedra:', error);
@@ -137,7 +133,6 @@ export class UserProfileComponent implements OnInit {
   DefineDisciplines() {
     if (this.Role !== 'Teacher') return;
     this.disciplines = this.CurrentUser['teacher'].disciplines;
-    console.log(this.disciplines);
   }
 
   DefineAssignments() {

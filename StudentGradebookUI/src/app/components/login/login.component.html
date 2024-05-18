@@ -1,4 +1,57 @@
-<div class="container">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<div style="position: relative;">
+  <mat-form-field appearance="fill" style="position: absolute; top: 0; left: 0;">
+    <mat-label>{{ 'lblLanguage' | translate }}</mat-label>
+    <mat-select [(value)]="translationService.currentLang" (selectionChange)="setLanguage($event.value)">
+      <mat-option *ngFor="let lang of translationService.Languages" [value]="lang.code" style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
+        <img src="./../../../assets/images/{{lang.code}}.png" alt="{{ lang.label }}" style="width: 24px; height: 24px;">
+        <span style="margin: 10px">{{lang.label}}</span>
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<div class="main-container">
+  <div class="main-container-item">
+    <div class="form-wrap-container">
+      <span class="form-title">{{ showRegistrationForm ? ('lblRegister' | translate) : 'lblLogin' | translate }}</span>
+        <ng-container *ngIf="!showRegistrationForm; else registrationTemplate">
+            <div class="login-form">
+            <span class="enter-data">{{ 'lblEnterData'  | translate}}</span>
+            <form (ngSubmit)="login()" #loginForm="ngForm" class="form-login-inner">
+              <mat-form-field appearance="fill" class="custom-input-width">
+                <mat-label>{{ 'lblUserName' | translate }}</mat-label>
+                <input matInput type="text" [(ngModel)]="username" name="username" required>
+              </mat-form-field>
+              <mat-form-field appearance="fill" class="custom-input-width">
+                <mat-label>{{ 'lblPassword' | translate }}</mat-label>
+                <input matInput type="password" [(ngModel)]="password" name="password" required>
+              </mat-form-field>
+              <div class="buttons-container">
+                <button mat-raised-button class="login-button" color="primary" type="submit" [disabled]="!loginForm.valid">{{ 'lblLoginButton' | translate }}</button>
+                <div class="register-suggestion">
+                  <span>{{'lblSuggestRegister' | translate}}</span>
+                  <span class="register-move-button" mat-button (click)="toggleForm()">{{ 'lblNeedToRegister' | translate }}</span>
+                </div>
+              </div>
+            </form>
+            </div>
+        </ng-container>
+        <ng-template #registrationTemplate>
+          <app-registration-form (onGoBack)="toggleForm()" (onRegistered)="handleRegistration()"></app-registration-form>
+        </ng-template>
+    </div>
+  </div>
+  <div class="main-container-item">
+    <img src="./../../../assets/images/login-page-image.png"/>
+  </div>
+</div>
+
+
+
+<!-- <div class="container">
   <mat-card class="card-container">
     <mat-card-header>
       <mat-card-title>{{ showRegistrationForm ? ('lblRegister' | translate) : 'lblLogin' | translate }}</mat-card-title>
@@ -31,4 +84,4 @@
       </ng-template>
     </mat-card-content>
   </mat-card>
-</div>
+</div> -->

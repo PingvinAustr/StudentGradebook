@@ -6,7 +6,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { AnalyticsComponent } from './components/analytics/analytics.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { TeacherAnalyticsComponent } from './components/teacher-analytics/teacher-analytics.component';
-import { DashboardInfoTeacherComponent } from './dashboard-info-teacher/dashboard-info-teacher.component';
+import { DashboardInfoTeacherComponent } from './components/dashboard-info-teacher/dashboard-info-teacher.component';
 import { ErrorPageComponent } from './components/error/error-page.component';
 const routes: Routes = [
   { path: 'login', component: LoginComponent },

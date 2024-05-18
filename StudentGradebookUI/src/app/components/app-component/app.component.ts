@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CafedraService } from '../../services/cafedra/cafedra.service'; // Adjust the path as necessary
 import { SignalRService } from 'src/app/services/signal-r/signal-r.service';
 import { ThemeService } from 'src/app/services/theme/theme.service';
+import { Observable } from 'rxjs';
+import { LoadingService } from 'src/app/services/loading/loading.service';
 
 @Component({
   selector: 'app-root',
@@ -10,11 +12,15 @@ import { ThemeService } from 'src/app/services/theme/theme.service';
 })
 export class AppComponent implements OnInit {
   title = 'StudentGradebookUI';
-
+  loading$: Observable<boolean>; 
+  
   constructor(private cafedraService: CafedraService,
     private signalRService: SignalRService,
-    private themeService: ThemeService
-  ) { }
+    private themeService: ThemeService,
+    private loadingService: LoadingService
+  ) { 
+     this.loading$ = this.loadingService.loading$;
+  }
 
   ngOnInit() {
     this.getCafedras();
@@ -30,10 +36,8 @@ export class AppComponent implements OnInit {
   getCafedras(): void {
     this.cafedraService.getCafedras().subscribe({
       next: (cafedras) => {
-        console.log('Cafedras:', cafedras);
       },
       error: (error) => {
-        console.error('Error fetching cafedras:', error);
       }
     });
   }

@@ -131,9 +131,7 @@ export class DashboardInfoComponent implements OnInit {
   }
 
   hideAllDueDateGrades() {
-    console.log(this.dueDateThisWeekAssignments);
     this.visibleDueDateAssignments = this.dueDateThisWeekAssignments.slice(0, 4);
-    console.log(this.visibleDueDateAssignments);
     this.IsHideAllButtonVisibleForDueDate = false;
     this.visibleDueDateCount = 4;
   }
@@ -151,7 +149,6 @@ export class DashboardInfoComponent implements OnInit {
     this.assignmentService.getAllAssignmentsForStudent(studentID)
     .subscribe(data => {
       allAssignmentsForStudent= data;
-      console.log(data);
       this.initStudentDountDiagram(allAssignmentsForStudent);
     });
   }
@@ -238,7 +235,6 @@ export class DashboardInfoComponent implements OnInit {
     const studentID = currentUser['student']['entryId'];
     this.semesterControlScheduleService.getSemesterControlScheduleForStudent(studentID)
     .subscribe(data => {
-      console.log(data);
       this.initStudentTimeLine(data);
     });
   }
