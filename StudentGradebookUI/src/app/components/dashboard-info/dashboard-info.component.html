@@ -1,1 +1,89 @@
-<p>dashboard-info works!</p>
+<p>{{formattedDate}}</p>
+<p>{{'lblWelcomeUserMessage' | translate}}, {{currentUserName}}!</p>
+
+
+
+<div class="main-cards-container">
+    <!--NEW GRADES BLOCK-->
+    <div>
+        <mat-card *ngIf="visibleAssignments">
+            <mat-card-header>
+                <mat-card-title>{{'lblNewGrades' | translate}}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <div *ngFor="let assignment of visibleAssignments; let i = index">
+                <div class="assignment" *ngIf="i < visibleCount">
+                    <span class="discipline-title-column">{{ assignment.discipline.name | translate}}</span>
+                    <span class="assignment-title-column">{{ assignment.name }}</span>
+                    <span class="grade">{{ assignment.grade }}</span>
+                </div>
+                </div>
+                <div class="show-more-button-container">
+                    <button mat-raised-button *ngIf="recentAssignmentsForStudent.length > visibleCount && IsShowMoreButtonVisibleForNewGrades" (click)="showMore()">
+                        <mat-icon>expand_more</mat-icon>
+                    </button>
+                    <button mat-raised-button *ngIf="visibleCount > 4 && IsHideAllButtonVisibleForNewGrades" (click)="hideAllNewGrades()">
+                        <mat-icon>expand_more</mat-icon>
+                    </button>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+    <!--DUE DATE THIS WEEK BLOCK-->
+    <div>
+        <mat-card *ngIf="dueDateThisWeekAssignments">
+            <mat-card-header>
+                <mat-card-title>{{'lblDueDateThisWeekGrades' | translate}}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <div *ngFor="let assignment of dueDateThisWeekAssignments; let i = index">
+                <div class="assignment" *ngIf="i < visibleDueDateCount">
+                    <span class="discipline-title-column">{{ assignment.discipline.name | translate}}</span>
+                    <span class="assignment-title-column">{{ assignment.name }}</span>
+                    <span class="grade">{{ formatDate(assignment.dueDate) }}</span>
+                </div>
+                </div>
+                <div class="show-more-button-container">
+                    <button mat-raised-button *ngIf="dueDateThisWeekAssignments.length > visibleDueDateCount && IsShowMoreButtonVisibleForDueDate" (click)="showMoreDueDateGrades()">
+                        <mat-icon>expand_more</mat-icon>
+                    </button>
+                    <button mat-raised-button *ngIf="visibleDueDateCount > 4 && IsHideAllButtonVisibleForDueDate" (click)="hideAllDueDateGrades()">
+                        <mat-icon>expand_more</mat-icon>
+                    </button>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <div>
+        <!--DONUT CHART-->
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>{{'lblStudentAssignmentStats' | translate}}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content *ngIf="donutChartOptions">
+                <apx-chart
+                    [series]="donutChartOptions.series"
+                    [chart]="donutChartOptions.chart"
+                    [labels]="donutChartOptions.labels"
+                    [responsive]="donutChartOptions.responsive"
+                    [colors]="donutChartOptions.colors"
+                    [plotOptions]="donutChartOptions.plotOptions"
+                ></apx-chart>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
+
+<div>
+    <apx-chart
+    [series]="timelineChartOptions.series"
+    [chart]="timelineChartOptions.chart"
+    [grid]="timelineChartOptions.grid"
+    [dataLabels]="timelineChartOptions.dataLabels"
+    [plotOptions]="timelineChartOptions.plotOptions"
+    [xaxis]="timelineChartOptions.xaxis"
+    [yaxis]="timelineChartOptions.yaxis"
+    [tooltip]="timelineChartOptions.tooltip"
+  ></apx-chart>
+  </div>

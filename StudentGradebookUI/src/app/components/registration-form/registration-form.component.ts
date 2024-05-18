@@ -4,6 +4,8 @@ import { GroupService } from 'src/app/services/group/group.service';
 import { CafedraService } from 'src/app/services/cafedra/cafedra.service';
 import { Group } from 'src/app/models/group.model';
 import { Cafedra } from 'src/app/models/cafedra.model';
+import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
+
 
 @Component({
   selector: 'app-registration-form',

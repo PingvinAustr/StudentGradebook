@@ -1,0 +1,31 @@
+<link href="https://fonts.googleapis.com/css?family=Encode+Sans+Semi+Condensed:100,200,300,400" rel="stylesheet">
+<body>
+  <h1>500</h1>
+  <h2>{{'lblUnexpectedError' | translate}} <b>:(</b></h2>
+   <button mat-raised-button color="primary" style="top:25%" (click)="toggleDetails()">
+    {{ showDetails ? ('lblHideDetails' | translate) : 'lblShowDetails' | translate}}
+    <mat-icon>{{ showDetails ? 'expand_less' : 'expand_more' }}</mat-icon>
+  </button>
+  <div class="gears">
+    <div class="gear one">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+    <div class="gear two">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+    <div class="gear three">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+  </div>
+   <div *ngIf="showDetails" class="error-details">
+    {{ errorMessage | json}}
+  </div>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="js/main.js" type="text/javascript"></script>
+</body>

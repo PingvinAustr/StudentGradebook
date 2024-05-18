@@ -1,0 +1,69 @@
+<p>{{formattedDate}}</p>
+<p>{{'lblWelcomeUserMessage' | translate}}, {{currentUserName}}!</p>
+
+<div class="main-cards-container">
+    <!--NEW GRADES BLOCK-->
+    <div>
+        <mat-card *ngIf="visibleUngradedAssignments">
+            <mat-card-header>
+                <mat-card-title>{{'lblAssignmentsToGrade' | translate}}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <div *ngFor="let assignment of visibleUngradedAssignments; let i = index">
+                <div class="assignment" *ngIf="i < visibleUngradedCount">
+                    <span class="discipline-title-column">{{ assignment.discipline.name | translate }}</span>
+                    <span class="assignment-title-column">{{ assignment.name }}</span>
+                    <span class="assignment-title-column">{{ assignment.student.firstName }} {{assignment.student.lastName}}</span>
+                    <span class="assignment-title-column">{{ assignment.student.group.name }}</span>
+                </div>
+                </div>
+                <div class="show-more-button-container">
+                    <button mat-raised-button *ngIf="ungradedAssignmentsForTeacher.length > visibleUngradedCount && IsShowMoreButtonVisibleForUngraded" (click)="showMoreUngraded()">
+                        <mat-icon>expand_more</mat-icon>
+                    </button>
+                    <button mat-raised-button *ngIf="visibleUngradedCount > 4 && IsHideAllButtonVisibleForNewUngraded" (click)="hideAllUngraded()">
+                        <mat-icon>expand_more</mat-icon>
+                    </button>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <div>
+        <!--RECENT CHECKED GRADES-->
+        <mat-card *ngIf="visiblerecentCheckedAssignments">
+            <mat-card-header>
+                <mat-card-title>{{'lblRecentCheckedAssignments' | translate}}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <div *ngFor="let assignment of visiblerecentCheckedAssignments; let i = index">
+                <div class="assignment" *ngIf="i < visiblerecentCheckedCount">
+                    <span class="discipline-title-column">{{ assignment.discipline.name | translate }}</span>
+                    <span class="assignment-title-column">{{ assignment.name }}</span>
+                    <span class="assignment-title-column">{{ assignment.student.firstName }} {{assignment.student.lastName}}</span>
+                    <span class="assignment-title-column">{{ assignment.student.group.name }}</span>
+                    <span class="assignment-title-column">{{ formatDate(assignment.gradeDate) }}</span>
+                </div>
+                </div>
+                <div class="show-more-button-container">
+                    <button mat-raised-button *ngIf="recentCheckedAssignmentsForTeacher.length > visiblerecentCheckedCount && IsShowMoreButtonVisibleForRecentChecked" (click)="showMoreRecentChecked()">
+                        <mat-icon>expand_more</mat-icon>
+                    </button>
+                    <button mat-raised-button *ngIf="visiblerecentCheckedCount > 4 && IsHideAllButtonVisibleForRecentChecked" (click)="hideAllRecentChecked()">
+                        <mat-icon>expand_more</mat-icon>
+                    </button>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <div>
+        <apx-chart
+            [series]="lineChartOptions.series"
+            [chart]="lineChartOptions.chart"
+            [xaxis]="lineChartOptions.xaxis"
+            [dataLabels]="lineChartOptions.dataLabels"
+            [grid]="lineChartOptions.grid"
+            [stroke]="lineChartOptions.stroke"
+            [title]="lineChartOptions.title"
+        ></apx-chart>
+    </div>
+</div>

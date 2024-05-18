@@ -1,18 +1,24 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { TranslationService } from '../translation/translation-service.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private apiUrl = `${environment.apiUrl}/Authentication`;
-
-  constructor(private http: HttpClient, private router: Router, private snackBar: MatSnackBar) { }
+  public translationService;
+  constructor(private http: HttpClient, 
+    private router: Router, 
+    private snackBar: MatSnackBar,
+    private injector: Injector) { 
+       setTimeout(() => this.translationService = this.injector.get(TranslationService), 0);
+    }
 
   login(username: string, password: string): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/login`, { username, password }).pipe(
@@ -27,7 +33,7 @@ export class AuthService {
     localStorage.removeItem('jwtToken');
     localStorage.removeItem('user');
     this.router.navigate(['/login']);
-    this.snackBar.open('Logged out successfully', 'Close', { duration: 3000 });
+    this.snackBar.open(this.translationService.translate('lblLoggedOutSuccess'), this.translationService.translate('lblClose'), { duration: 3000 });
   }
 
   getToken(): string {

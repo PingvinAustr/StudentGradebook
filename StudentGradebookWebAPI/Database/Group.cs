@@ -13,5 +13,7 @@ public partial class Group
 
     public virtual Cafedra? Cafedra { get; set; }
 
+    public virtual ICollection<SemesterControlSchedule> SemesterControlSchedules { get; set; } = new List<SemesterControlSchedule>();
+
     public virtual ICollection<Student> Students { get; set; } = new List<Student>();
 }

@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'; 
 import { AppComponent } from './components/app-component/app.component';
@@ -18,6 +18,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { GroupService } from './services/group/group.service';
 import { TranslationService } from './services/translation/translation-service.service';
+import { AssignmentService } from './services/assignments/assignment-service.service';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -28,16 +29,46 @@ import { DashboardInfoComponent } from './components/dashboard-info/dashboard-in
 import { GradebookComponent } from './components/gradebook/gradebook.component';
 import { UserProfileComponent } from './components/userprofile/userprofile.component';
 import { MatTableModule } from '@angular/material/table';
+import { TranslatePipe } from './pipes/translation/translation-pipe.pipe';
+import { NgApexchartsModule } from 'ng-apexcharts';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { DisciplineService } from './services/disciplines/disciplines.service';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { AnalyticsComponent } from './components/analytics/analytics.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { TeacherAnalyticsComponent } from './components/teacher-analytics/teacher-analytics.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatPasswordStrengthModule } from "@angular-material-extensions/password-strength";
+import { DashboardInfoTeacherComponent } from './dashboard-info-teacher/dashboard-info-teacher.component';
+import { SemesterScheduleServiceService } from './services/semester-control/semester-schedule-service.service';
+import { SignalRService } from './services/signal-r/signal-r.service';
+import { ErrorPageComponent } from './components/error/error-page.component';
+import { ErrorHandlingService } from './services/error-handling/error-handling.service';
+import { ThemeService } from './services/theme/theme.service';
+
+export function initApp(translationService: TranslationService) {
+  return () => {
+    const lang = localStorage.getItem('appLang') || 'UA'; 
+    return translationService.loadTranslations(lang).toPromise();
+  };
+}
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegistrationFormComponent,
+    AnalyticsComponent,
+    TeacherAnalyticsComponent,
     DashboardComponent,
     DashboardInfoComponent,
+    DashboardInfoTeacherComponent,
     GradebookComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    PageNotFoundComponent,
+    ErrorPageComponent,
+    TranslatePipe
   ],
 
   imports: [
@@ -57,7 +88,13 @@ import { MatTableModule } from '@angular/material/table';
     MatSidenavModule,
     MatListModule,
     MatIconModule,
-    MatTableModule
+    MatTableModule,
+    MatDatepickerModule,
+    MatSlideToggleModule,
+    MatNativeDateModule,
+    MatPasswordStrengthModule,
+    MatCheckboxModule,
+    NgApexchartsModule
   ],
 
   providers: [
@@ -65,7 +102,19 @@ import { MatTableModule } from '@angular/material/table';
     AuthService,
     GroupService,
     TranslationService,
+    AssignmentService,
+    DisciplineService,
+    SignalRService,
+    ThemeService,
+    ErrorHandlingService,
+    SemesterScheduleServiceService,
      { provide: HTTP_INTERCEPTORS, useClass: JWTInterceptorInterceptor, multi: true },
+     {
+      provide: APP_INITIALIZER,
+      useFactory: initApp,
+      deps: [TranslationService],
+      multi: true
+    }
   ],
 
   bootstrap: [AppComponent]
