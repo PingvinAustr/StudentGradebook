@@ -1,0 +1,32 @@
+name: .NET Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: '6.0.x'
+
+    - name: Restore dependencies
+      run: dotnet restore
+      working-directory: StudentGradebookTests
+
+    - name: Build
+      run: dotnet build --no-restore
+      working-directory: StudentGradebookTests
+
+    - name: Test
+      run: dotnet test --no-restore --verbosity normal
+      working-directory: StudentGradebookTests
