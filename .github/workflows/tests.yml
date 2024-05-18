@@ -22,8 +22,7 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v2
       with:
-        dotnet-version: '6.0.200'
-
+        dotnet-version: '6.0.x' # Update this to the latest .NET 6.0 version that supports .NET 8.0
 
     - name: Restore dependencies
       run: dotnet restore
