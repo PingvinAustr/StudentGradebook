@@ -9,7 +9,7 @@ import { UserProfileComponent } from '../userprofile/userprofile.component';
 import { TranslationService } from 'src/app/services/translation/translation-service.service';
 import { AnalyticsComponent } from '../analytics/analytics.component';
 import { TeacherAnalyticsComponent } from '../teacher-analytics/teacher-analytics.component';
-import { DashboardInfoTeacherComponent } from 'src/app/dashboard-info-teacher/dashboard-info-teacher.component';
+import { DashboardInfoTeacherComponent } from 'src/app/components/dashboard-info-teacher/dashboard-info-teacher.component';
 import { ThemeService } from 'src/app/services/theme/theme.service';
 
 @Component({
@@ -33,7 +33,7 @@ export class DashboardComponent {
     this.currentUser = this.userService.getUser();
     this.selectedOption = 'dashboard-info';
     this.selectedComponent = this.currentUser['role'] === 1 ? DashboardInfoComponent : DashboardInfoTeacherComponent;
-    console.log(this.currentUser);
+
   }
 
   onSelectOption(option: string): void {

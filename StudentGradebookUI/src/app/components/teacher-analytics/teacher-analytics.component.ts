@@ -58,7 +58,6 @@ export class TeacherAnalyticsComponent {
     loadRadialChart() {
       const teacherId = this.userService.getUser()['teacher'].entryId;
       this.assignmentService.getAllAssignmentsForTeacher(teacherId).subscribe(data => {
-        console.log(data);
         this.radialChartAssignments = data;
         this.initRadialChart();
       });
@@ -147,7 +146,6 @@ export class TeacherAnalyticsComponent {
     loadHorizontalBarChart() {
       const teacherId = this.userService.getUser()['teacher'].entryId;
       this.assignmentService.getAllAssignmentsForTeacher(teacherId).subscribe(data => {
-        console.log(data);
         this.horizontalTabAssignments = data;
         this.initHorizontalChart();
       });
@@ -172,10 +170,6 @@ export class TeacherAnalyticsComponent {
       acc[key] = Math.round(gradesSumCount[key].sum / gradesSumCount[key].count);
       return acc;
     }, {} as { [key: string]: number });
-
-    console.log(averageGradesByDiscipline);
-
-
 
       this.horizontalBarChartOptions = {
       series: [

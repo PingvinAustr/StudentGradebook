@@ -92,6 +92,7 @@ namespace StudentGradebookWebAPI.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<dynamic>> Login([FromBody] LoginDto loginDto)
         {
+            System.Threading.Thread.Sleep(2000);
             var user = await _context.WebApicredentials
                 .FirstOrDefaultAsync(u => u.UserName == loginDto.UserName && u.Password == loginDto.Password);
 

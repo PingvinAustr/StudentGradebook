@@ -2,3 +2,78 @@ form {
     display: flex;
     flex-direction: column;
 }
+
+.form-container {
+    padding: 30px;
+    width: 783px;
+    height: 494px;
+    box-shadow: -5px 13px 29px 0px rgba(218, 225, 231, 0.98) !important;
+    
+}
+
+.tab-window {
+    padding-top: 30px;
+    height: 494px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.suggestion-label {
+    margin: 5px 0;
+    font-size: 16px;
+    font-family: "Montserrat", sans-serif !important;
+}
+
+.mdc-tab {
+    width: 100px !important;
+}
+
+.form-row {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.small-input {
+    width:  360px;
+    border: 1px solid #E6E6E6;
+    border-radius: 5px;
+}
+
+.register-button {
+    margin-top: 15px;
+    height: 60px;
+    width: 283px;
+}
+
+.mat-mdc-raised-button.mat-primary {
+    //background: #1D95D9;
+    --mdc-protected-button-container-color: #1D95D9;
+}
+
+.buttons-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 25px;
+}
+
+.suggestion-label-bottom {
+    color: rgba(25, 89, 125, 1);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0 0 0;
+    gap: 5px;
+    font-size: 14px;
+}
+
+.alt-text {
+    text-decoration: underline;
+}
+
+.alt-text:hover {
+    cursor: pointer;
+}

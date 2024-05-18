@@ -5,6 +5,7 @@ import { CafedraService } from 'src/app/services/cafedra/cafedra.service';
 import { Group } from 'src/app/models/group.model';
 import { Cafedra } from 'src/app/models/cafedra.model';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -14,6 +15,7 @@ import { MatPasswordStrengthModule } from '@angular-material-extensions/password
 })
 export class RegistrationFormComponent {
   @Output() onRegistered = new EventEmitter<void>();
+  @Output() onGoBack = new EventEmitter<void>();
   groups: Group[] = [];
   cafedras: Cafedra[] = [];
 
@@ -38,7 +40,8 @@ export class RegistrationFormComponent {
   constructor(
     private authService: AuthService,
     private groupService: GroupService,
-    private cafedraService: CafedraService
+    private cafedraService: CafedraService,
+    private router: Router
   ) {
     this.loadGroups();
     this.loadCafedras();
@@ -55,11 +58,9 @@ export class RegistrationFormComponent {
   registerStudent(): void {
     this.authService.registerStudent(this.student).subscribe({
       next: (response) => {
-        console.log('Student registration successful', response);
         this.onRegistered.emit();
       },
       error: (error) => {
-        console.error('Student registration failed', error);
       }
     });
   }
@@ -67,12 +68,16 @@ export class RegistrationFormComponent {
   registerTeacher(): void {
     this.authService.registerTeacher(this.teacher).subscribe({
       next: (response) => {
-        console.log('Teacher registration successful', response);
         this.onRegistered.emit();
       },
       error: (error) => {
         console.error('Teacher registration failed', error);
       }
     });
+  }
+
+  toggleForm() {
+    console.log('a"0;');
+    this.onGoBack.emit();
   }
 }

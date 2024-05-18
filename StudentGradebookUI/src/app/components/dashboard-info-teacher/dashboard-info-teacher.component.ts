@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AssignmentService } from '../services/assignments/assignment-service.service';
-import { DisciplineService } from '../services/disciplines/disciplines.service';
-import { TranslationService } from '../services/translation/translation-service.service';
-import { UserService } from '../services/user/user-service.service';
-import { Assignment } from '../models/assignment.model';
+import { AssignmentService } from '../../services/assignments/assignment-service.service';
+import { DisciplineService } from '../../services/disciplines/disciplines.service';
+import { TranslationService } from '../../services/translation/translation-service.service';
+import { UserService } from '../../services/user/user-service.service';
+import { Assignment } from '../../models/assignment.model';
 import { TeacherChartOptions } from 'src/assets/charts.options';
 
 @Component({
@@ -37,8 +37,6 @@ export class DashboardInfoTeacherComponent implements OnInit {
     let monthName = month[now.getMonth()];
 
     const dayOfMonth = now.getDate();
-    console.log(dayOfWeek);
-    console.log(monthName);
     const monthNameLocalized = this.translationService.translate(`lbl${monthName}L`);
     this.formattedDate = `${this.translationService.translate(`lbl${dayOfWeek}`)}, ${dayOfMonth} ${monthNameLocalized}`;
   }
@@ -103,7 +101,6 @@ export class DashboardInfoTeacherComponent implements OnInit {
     const teacherId = currentUser['teacher']['entryId'];
     this.assignmentService.getRecentCheckedGradesByTeacher(teacherId)
     .subscribe(data => {
-      console.log(data);
       this.recentCheckedAssignmentsForTeacher = data;
       this.updateVisibleRecentCheckedAssignments();
     });
@@ -134,7 +131,6 @@ export class DashboardInfoTeacherComponent implements OnInit {
   loadLineChart() {
     const teacherId = this.userService.getUser()['teacher'].entryId;
       this.assignmentService.getAllAssignmentsForTeacher(teacherId).subscribe(data => {
-        console.log(data);
         this.initLineChart(data);
       });
   }
