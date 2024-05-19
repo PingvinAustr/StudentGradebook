@@ -15,6 +15,8 @@ mat-card-header {
 .main-cards-container {
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
+    margin-top: 20px;
 }
 
 .show-more-button-container {
@@ -24,6 +26,79 @@ mat-card-header {
     justify-content: center;
 }
 
-.discipline-title-column, .assignment-title-column {
-    width: 200px;
+
+.formatted-date {
+    font-size: 18px;
+    font-weight: 300;
+    color: rgba(92, 92, 92, 1);
+}
+
+.welcome-message {
+    font-weight: 400;
+    font-size: 28px;
+    color: rgba(25, 89, 125, 1);
+}
+
+.card-container {
+    width: 330px;
+}
+
+.diagram-container {
+    width: 442px;;
+}
+
+::ng-deep mat-card-header {
+    background: unset !important;
+}
+
+.card-title {
+    margin-top: -7px;
+    color: rgba(33, 61, 76, 1);
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.column-data-header {
+    margin-top: 7px;
+    display: flex;
+    flex-direction: column;
+}
+
+.data-title-column {
+    color: rgba(39, 131, 183, 1);
+    font-weight: 500;
+    font-size: 12px;
+}
+
+.data-content-column {
+    font-size: 16px;
+    font-weight: 300;
+}
+
+.split {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.grade {
+    font-weight: 400;
+    font-size: 18px;
+}
+
+.separator {
+    border-bottom: 1px solid rgba(139, 139, 139, 0.31);
+    margin-top: 13px;
+}
+
+::ng-deep .apexcharts-legend-text {
+    font-size: 16px !important;
+}
+
+.timeline-diagram-container {
+    margin-top: 10px;
+}
+
+mat-card-content {
+    box-shadow: 0px 2px 13.8px 0px rgba(0, 0, 0, 0.15);
 }

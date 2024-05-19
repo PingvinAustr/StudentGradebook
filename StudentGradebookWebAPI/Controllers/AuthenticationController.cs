@@ -109,7 +109,7 @@ namespace StudentGradebookWebAPI.Controllers
                 Role = isTeacher ? Roles.Teacher : Roles.Student,
                 WebAPICredentialID = user.EntryId,
                 Student = !isTeacher ? await _context.Students
-                    .Where(x => x.WebApiCredentialId == user.EntryId)
+                    .Where(x => x.WebApiCredentialId == user.EntryId).Include(x => x.Group)
                     .Include(t => t.Assignments).ThenInclude(tt => tt.Discipline)
                     .FirstOrDefaultAsync() : null,
                 Teacher = isTeacher ? await _context.Teachers

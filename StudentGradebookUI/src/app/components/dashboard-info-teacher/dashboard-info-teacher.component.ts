@@ -75,7 +75,7 @@ export class DashboardInfoTeacherComponent implements OnInit {
   showMoreUngraded() {
     this.visibleUngradedCount = Math.min(this.ungradedAssignmentsForTeacher.length, this.visibleUngradedCount + 4);
     this.updateVisibleUngradedAssignments();
-    if (this.visibleUngradedCount >= 16) this.IsShowMoreButtonVisibleForUngraded = false;
+    if (this.visibleUngradedCount >= 8) this.IsShowMoreButtonVisibleForUngraded = false;
     this.IsHideAllButtonVisibleForNewUngraded = true;
   }
 
@@ -111,7 +111,7 @@ export class DashboardInfoTeacherComponent implements OnInit {
   showMoreRecentChecked() {
     this.visiblerecentCheckedCount = Math.min(this.recentCheckedAssignmentsForTeacher.length, this.visiblerecentCheckedCount + 4);
     this.updateVisibleRecentCheckedAssignments();
-    if (this.visiblerecentCheckedCount >= 16) this.IsShowMoreButtonVisibleForRecentChecked = false;
+    if (this.visiblerecentCheckedCount >= 8) this.IsShowMoreButtonVisibleForRecentChecked = false;
     this.IsHideAllButtonVisibleForRecentChecked = true;
   }
 

@@ -1,29 +1,32 @@
-<p>{{formattedDate}}</p>
-<p>{{'lblWelcomeUserMessage' | translate}}, {{currentUserName}}!</p>
+<p class="formatted-date">{{formattedDate}}</p>
+<p class="welcome-message">{{'lblWelcomeUserMessage' | translate}}, {{currentUserName}}!</p>
 
 
 
 <div class="main-cards-container">
     <!--NEW GRADES BLOCK-->
-    <div>
+    <div class="card-container">
         <mat-card *ngIf="visibleAssignments">
             <mat-card-header>
-                <mat-card-title>{{'lblNewGrades' | translate}}</mat-card-title>
+                <mat-card-title class="card-title">{{'lblNewGrades' | translate}}</mat-card-title>
             </mat-card-header>
             <mat-card-content>
                 <div *ngFor="let assignment of visibleAssignments; let i = index">
-                <div class="assignment" *ngIf="i < visibleCount">
-                    <span class="discipline-title-column">{{ assignment.discipline.name | translate}}</span>
-                    <span class="assignment-title-column">{{ assignment.name }}</span>
-                    <span class="grade">{{ assignment.grade }}</span>
+                <div class="assignment column-data-header" *ngIf="i < visibleCount">
+                    <span class="discipline-title-column data-title-column">{{ assignment.discipline.name | translate}}</span>
+                    <div class="split">
+                        <span class="assignment-title-column data-content-column">{{ assignment.name }}</span>
+                        <span class="grade">{{ assignment.grade }}</span>
+                    </div>
+                    <div class="separator"></div>
                 </div>
                 </div>
                 <div class="show-more-button-container">
                     <button mat-raised-button *ngIf="recentAssignmentsForStudent.length > visibleCount && IsShowMoreButtonVisibleForNewGrades" (click)="showMore()">
-                        <mat-icon>expand_more</mat-icon>
+                        <img src="./../../../assets/images/show-more.svg"/>
                     </button>
                     <button mat-raised-button *ngIf="visibleCount > 4 && IsHideAllButtonVisibleForNewGrades" (click)="hideAllNewGrades()">
-                        <mat-icon>expand_more</mat-icon>
+                        <img src="./../../../assets/images/show-more.svg" style="transform: rotateZ(180deg);"/>
                     </button>
                 </div>
             </mat-card-content>
@@ -31,25 +34,27 @@
     </div>
 
     <!--DUE DATE THIS WEEK BLOCK-->
-    <div>
+    <div class="card-container">
         <mat-card *ngIf="dueDateThisWeekAssignments">
             <mat-card-header>
-                <mat-card-title>{{'lblDueDateThisWeekGrades' | translate}}</mat-card-title>
+                <mat-card-title class="card-title">{{'lblDueDateThisWeekGrades' | translate}}</mat-card-title>
             </mat-card-header>
             <mat-card-content>
                 <div *ngFor="let assignment of dueDateThisWeekAssignments; let i = index">
-                <div class="assignment" *ngIf="i < visibleDueDateCount">
-                    <span class="discipline-title-column">{{ assignment.discipline.name | translate}}</span>
-                    <span class="assignment-title-column">{{ assignment.name }}</span>
-                    <span class="grade">{{ formatDate(assignment.dueDate) }}</span>
+                <div class="assignment column-data-header" *ngIf="i < visibleDueDateCount">
+                    <span class="discipline-title-column data-title-column">{{ assignment.discipline.name | translate}}</span>
+                    <div class="split">
+                        <span class="assignment-title-column data-content-column">{{ assignment.name }}</span>
+                        <span class="grade">{{ formatDate(assignment.dueDate) }}</span>
+                    </div>
                 </div>
                 </div>
                 <div class="show-more-button-container">
                     <button mat-raised-button *ngIf="dueDateThisWeekAssignments.length > visibleDueDateCount && IsShowMoreButtonVisibleForDueDate" (click)="showMoreDueDateGrades()">
-                        <mat-icon>expand_more</mat-icon>
+                       <img src="./../../../assets/images/show-more.svg"/>
                     </button>
                     <button mat-raised-button *ngIf="visibleDueDateCount > 4 && IsHideAllButtonVisibleForDueDate" (click)="hideAllDueDateGrades()">
-                        <mat-icon>expand_more</mat-icon>
+                        <img src="./../../../assets/images/show-more.svg" style="transform: rotateZ(180deg);"/>
                     </button>
                 </div>
             </mat-card-content>
@@ -75,7 +80,7 @@
     </div>
 </div>
 
-<div>
+<div class="timeline-diagram-container">
     <apx-chart
     [series]="timelineChartOptions.series"
     [chart]="timelineChartOptions.chart"
@@ -85,5 +90,6 @@
     [xaxis]="timelineChartOptions.xaxis"
     [yaxis]="timelineChartOptions.yaxis"
     [tooltip]="timelineChartOptions.tooltip"
+    [title]="timelineChartOptions.title"
   ></apx-chart>
   </div>

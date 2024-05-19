@@ -92,4 +92,5 @@ export type TimeLineChartOptions = {
   xaxis: ApexXAxis;
   plotOptions: ApexPlotOptions;
   tooltip: ApexTooltip;
+  title: ApexTitleSubtitle;
 };

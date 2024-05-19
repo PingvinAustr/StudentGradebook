@@ -12,6 +12,7 @@
   "lblThenLogin": "Log in",
   "lblStudentTab": "I am a student",
   "lblTeacherTab": "I am a teacher",
+  "lblKNUTitle": "KNU of Taras Shevchenko",
   "lblUserName": "Username",
   "lblPassword": "Password",
   "lblNeedToRegister": "Create it",
@@ -118,5 +119,9 @@
   "lblOPI":"Basics Of Program Engineering",
   "lblDataProtection": "Data Protection",
   "lblOOPBasics": "OOP Basics",
-  "lblFunctionalProgramming": "Functional Programming"
+  "lblFunctionalProgramming": "Functional Programming",
+  "lblStudentRole": "Student",
+  "lblTeacherRole": "Teacher",
+  "lblGroupInText": "group",
+  "lblSessionTimeLine": "Exams timeline"
 }

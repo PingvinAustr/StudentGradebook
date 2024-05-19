@@ -90,7 +90,7 @@ export class DashboardInfoComponent implements OnInit {
   showMore() {
     this.visibleCount = Math.min(this.recentAssignmentsForStudent.length, this.visibleCount + 4);
     this.updateVisibleAssignments();
-    if (this.visibleCount >= 16) this.IsShowMoreButtonVisibleForNewGrades = false;
+    if (this.visibleCount >= 8) this.IsShowMoreButtonVisibleForNewGrades = false;
     this.IsHideAllButtonVisibleForNewGrades = true;
   }
 
@@ -126,7 +126,7 @@ export class DashboardInfoComponent implements OnInit {
   showMoreDueDateGrades() {
     this.visibleDueDateCount = Math.min(this.dueDateThisWeekAssignments.length, this.visibleDueDateCount + 4);
     this.updateVisibleDueDateAssignments();
-    if (this.visibleDueDateCount >= 16) this.IsShowMoreButtonVisibleForDueDate = false;
+    if (this.visibleDueDateCount >= 8) this.IsShowMoreButtonVisibleForDueDate = false;
     this.IsHideAllButtonVisibleForDueDate = true;
   }
 
@@ -185,7 +185,7 @@ export class DashboardInfoComponent implements OnInit {
     this.donutChartOptions = {
       series: series,
       chart: {
-        width: 354,
+        width: 490,
         type: "donut",
       },
       labels: labels,
@@ -222,7 +222,7 @@ export class DashboardInfoComponent implements OnInit {
             }
           }
         }},
-      colors: ["#FF4560", "#00E396", "#FEB019", "#775DD0", "#008FFB"],
+      colors: ["rgba(7, 116, 145, 1)", "rgba(129, 208, 223, 1)", "#FEB019", "#775DD0", "#008FFB"],
     };
   }
 
@@ -304,6 +304,10 @@ export class DashboardInfoComponent implements OnInit {
           format: 'dd MMM yyyy',
         },
         enabled: false
+      },
+      title: {
+        text: this.translationService.translate('lblSessionTimeLine'),
+        align: "left"
       },
     };
   }
