@@ -32,6 +32,7 @@ export class DashboardComponent {
    ngOnInit() {
     this.currentUser = this.userService.getUser();
     this.selectedOption = 'dashboard-info';
+    console.log(this.currentUser);
     this.selectedComponent = this.currentUser['role'] === 1 ? DashboardInfoComponent : DashboardInfoTeacherComponent;
 
   }

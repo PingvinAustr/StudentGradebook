@@ -1,31 +1,62 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #sidenav mode="side" opened="true">
     <mat-nav-list>
-      <mat-list-item (click)="onSelectOption('dashboard-info')">{{ 'lblDashboard' | translate }}</mat-list-item>
-      <mat-list-item (click)="onSelectOption('gradebook')">{{ 'lblGradebook' | translate }}</mat-list-item>
-      <mat-list-item (click)="onSelectOption('user-profile')">{{ 'lblUserProfile' | translate }}</mat-list-item>
-      <mat-list-item (click)="onSelectOption('analytics')">{{ 'lblAnalytics' | translate }}</mat-list-item>
+      <div class="uni-logo-container"> 
+         <img src="./../../../assets/images/KNU.png"/>
+         <span> {{'lblKNUTitle' | translate}}</span>
+      </div>
+
+      <mat-list-item (click)="onSelectOption('dashboard-info')" style="margin-top: 20px" [ngClass]="{'selected-option': selectedOption === 'dashboard-info'}">
+        <img src="./../../../assets/images/li_home.svg"/>
+        <span>{{ 'lblDashboard' | translate }}</span>
+      </mat-list-item>
+      <mat-list-item (click)="onSelectOption('gradebook')" [ngClass]="{'selected-option': selectedOption === 'gradebook'}">
+        <img src="./../../../assets/images/li_grid.svg"/>
+        <span>{{ 'lblGradebook' | translate }}</span>
+      </mat-list-item>
+      <mat-list-item (click)="onSelectOption('analytics')" [ngClass]="{'selected-option': selectedOption === 'analytics'}">
+        <img src="./../../../assets/images/li_search.svg"/>
+        <span>{{ 'lblAnalytics' | translate }}</span>
+      </mat-list-item>
+      <mat-list-item (click)="onSelectOption('user-profile')" [ngClass]="{'selected-option': selectedOption === 'user-profile'}">
+        <img src="./../../../assets/images/li_user.svg"/>
+        <span>{{ 'lblUserProfile' | translate }}</span>
+      </mat-list-item>
+        <mat-list-item style="margin-top: 385px">
+        <div class="current-user-mini-container">
+
+          <img *ngIf="currentUser.role === 1" [src]="currentUser.student.avatarImage" />
+          <img *ngIf="currentUser.role !== 1" [src]="currentUser.teacher.avatarImage" />
+
+          <div *ngIf="currentUser.role === 1" class="current-user-mini-text">
+            <span>{{currentUser.student.firstName}} {{currentUser.student.lastName}}</span>
+            <div class="not-bold"><span>{{'lblStudentRole' | translate}}</span>, <span>{{'lblGroupInText' | translate}} {{ currentUser.student.group.name }}</span></div>
+          </div>
+          <div *ngIf="currentUser.role === 0" class="current-user-mini-text">
+            <span>{{currentUser.teacher.firstName}} {{currentUser.teacher.lastName}}</span>
+            <div class="not-bold"><span>{{'lblTeacherRole' | translate}}</span></div>
+          </div>
+        </div>
+      </mat-list-item>
+      <mat-list-item style="margin-top: 40px">
       <mat-form-field appearance="fill">
-          <mat-label>{{ 'lblLanguage' | translate }}</mat-label>
           <mat-select [(value)]="translationService.currentLang" (selectionChange)="setLanguage($event.value)">
             <mat-option *ngFor="let lang of translationService.Languages" [value]="lang.code">
               {{ lang.label }}
             </mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-list-item>
-          <mat-slide-toggle (change)="themeService.toggleTheme()">{{'lblDarkMode' | translate}}</mat-slide-toggle>
-        </mat-list-item>
-      <mat-list-item (click)="logout()">
-        <mat-icon>logout</mat-icon>
-        {{ 'lblLogout' | translate }}
+        <mat-slide-toggle (change)="themeService.toggleTheme()"><img style="height: 18px; width: 18px;" src="./../../../assets/images/moon.png"/></mat-slide-toggle>
+      </mat-list-item>
+      <mat-list-item (click)="logout()" style="margin-top: 15px">
+        <div class="logout-button">
+          <img src="./../../../assets/images/li_log-out.svg" style="height: 18px; width: 18px;">
+          {{ 'lblLogout' | translate }}
+        </div>
       </mat-list-item>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content class="sidebar-content">
-    <mat-toolbar color="primary">
-      {{ 'lblLoggedAs' | translate }} {{ currentUser.Role }} {{ currentUser.userName }}
-    </mat-toolbar>
     <div class="main-content">
       <!-- Dynamic content based on selection -->
       <ng-container *ngIf="selectedOption">
