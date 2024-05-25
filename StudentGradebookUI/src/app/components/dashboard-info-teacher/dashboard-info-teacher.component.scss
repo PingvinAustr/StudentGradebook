@@ -91,3 +91,19 @@ mat-card-header {
     border-bottom: 1px solid rgba(139, 139, 139, 0.31);
     margin-top: 13px;
 }
+
+.grades-block .assignment-title-column {
+    min-width: 200px;
+}
+
+::ng-deep {
+    .dark-theme {
+        mat-card-content {
+            background: #8f8b82 !important;
+        }
+
+        mat-card-header {
+            background: #8f8b82 !important;
+        }
+    }
+}

@@ -1,0 +1,20 @@
+<h1 mat-dialog-title>{{ 'lblGradeTable' | translate }}</h1>
+<div class="grid">
+            <table class="grade-table">
+                <thead>
+                <tr>
+                    <th class="heading">{{'lblDiscipline' | translate}}</th>
+                    <th class="heading" *ngFor="let date of uniqueDates">{{ date | date: 'dd.MM.yy' }}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let discipline of uniqueDisciplines">
+                    <td>{{ discipline.name | translate}}</td>
+                    <td *ngFor="let date of uniqueDates" [ngClass]="{'empty-cell': !getGrade(discipline.entryId, date) }"
+                    (click)="openGradeDetail(discipline.entryId, date)">
+                    {{ getGrade(discipline.entryId, date) }}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>

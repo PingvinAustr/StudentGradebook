@@ -37,7 +37,7 @@ namespace StudentGradebookWebAPI.Controllers
             if (disciplineIds != null && disciplineIds.Length > 0)
                 query = query.Where(a => disciplineIds.Contains(a.DisciplineId));
 
-            return await query.Include(a => a.Discipline).ToListAsync();
+            return await query.Include(a => a.Discipline).ThenInclude(x => x.Teacher).ToListAsync();
         }
 
         [Auth]
@@ -266,6 +266,16 @@ namespace StudentGradebookWebAPI.Controllers
         private bool AssignmentExists(int id)
         {
             return _context.Assignments.Any(e => e.EntryId == id);
+        }
+
+        // GET: api/Assignments/GetToDoForStudent/5
+        [Auth]
+        [HttpGet("GetToDoForStudent/{studentId}")]
+        public async Task<ActionResult<IEnumerable<Assignment>>> GetTodoAssignmentsForStudent(int studentId)
+        {
+            var query = _context.Assignments.Where(a => a.StudentId == studentId && a.GradeDate == null);
+
+            return await query.Include(a => a.Discipline).ThenInclude(x => x.Teacher).Include(x=>x.AssignmentDetails).ToListAsync();
         }
     }
 }

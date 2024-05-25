@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class ThemeService {
   private readonly themeKey = 'user-theme';
-  private darkMode = false;
+  public darkMode = false;
 
   constructor() {
     this.loadTheme();

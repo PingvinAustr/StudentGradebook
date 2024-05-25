@@ -1,0 +1,158 @@
+.title {
+    font-weight: 400;
+    font-size: 28px;
+    color: rgba(25, 89, 125, 1);
+}
+
+.gradebook-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.filterable-grid {
+    height: 450px;
+    width: 100%;
+}
+
+.blockuys {
+    width: 100%;
+    height: 300px;
+}
+
+
+::ng-deep .gradebook-page mat-slide-toggle {
+    margin-top: 17px;
+}
+
+::ng-deep .gradebook-page .mat-slide-toggle {
+    height: 56px !important;
+}
+
+::ng-deep .gradebook-page .mat-mdc-text-field-wrapper {
+    height: 56px !important;
+}
+
+::ng-deep .mat-mdc-select {
+    padding-top: 10px !important;
+}
+
+::ng-deep .gradebook-page{
+    .mat-mdc-select {
+        padding-top: 0px !important;
+    }
+}
+
+::ng-deep .gradebook-page .mat-mdc-select-arrow-wrapper {
+    margin-top: -7px !important;
+}
+
+.grid {
+    height: 377px;
+    width: 100%;
+    background-color: rgba(221, 227, 237, 0.48);
+    border-radius: 5px;
+    overflow: scroll;
+}
+
+table {
+    border-spacing: 0;
+    table-layout:fixed !important;
+}
+
+td {
+    border: 1px solid #F5F5F5;
+    height: 60px;
+    text-align: center;
+    transition: .5s;
+}
+
+td:not(:first-child) {
+    cursor: pointer;
+}
+
+td:not(:first-child):not(.empty-cell):hover {
+    background: white;
+}
+
+.empty-cell {
+    background-color: #e7e7e7;
+    cursor: default;
+}
+
+
+.heading {
+    height: 50px;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.show-more-icon {
+    cursor: pointer;
+    transition: .5s;
+}
+
+.show-more-icon:hover {
+    opacity: 0.45;
+}
+
+.card-container {
+
+}
+
+::ng-deep mat-card-header {
+    background: unset !important;
+}
+
+.card-title {
+    margin-top: -7px;
+    color: rgba(33, 61, 76, 1);
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.column-data-header {
+    margin-top: 7px;
+    display: flex;
+    flex-direction: column;
+}
+
+.data-title-column {
+    color: rgba(39, 131, 183, 1);
+    font-weight: 500;
+    font-size: 12px;
+}
+
+.data-content-column {
+    font-size: 16px;
+    font-weight: 300;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.split {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.grade {
+    font-weight: 400;
+    font-size: 18px;
+}
+
+.separator {
+    border-bottom: 1px solid rgba(139, 139, 139, 0.31);
+    margin-top: 13px;
+}
+
+::ng-deep .gradebook-page mat-card {
+    max-height: 230px !important;
+    box-shadow: unset !important;
+}
+
+.deadline-date {
+    display: flex;
+    flex-direction: column;
+}

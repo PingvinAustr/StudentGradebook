@@ -1,0 +1,39 @@
+::ng-deep {
+.grid {
+    width: 100%;
+    background-color: rgba(221, 227, 237, 0.48);
+    border-radius: 5px;
+    overflow: scroll;
+}
+
+table {
+    border-spacing: 0;
+}
+
+td {
+    border: 1px solid #F5F5F5;
+    height: 60px;
+    text-align: center;
+    transition: .5s;
+}
+
+td:not(:first-child) {
+    cursor: pointer;
+}
+
+td:not(:first-child):not(.empty-cell):hover {
+    background: white;
+}
+
+.empty-cell {
+    background-color: #e7e7e7;
+    cursor: default;
+}
+
+
+.heading {
+    height: 50px;
+    font-weight: 500;
+    font-size: 14px;
+}
+}

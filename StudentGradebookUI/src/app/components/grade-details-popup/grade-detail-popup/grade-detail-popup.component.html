@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>{{ data.assignment.name }}</h1>
+<div mat-dialog-content>
+  <div><strong>{{'lblAssignmentName' | translate}}</strong> {{ data.assignment.name }}</div>
+  <div><strong>{{'lblDate' | translate}}</strong> {{ data.assignment.gradeDate | date: 'dd.MM.yyyy' }}</div>
+  <div>
+    <strong>{{'lblDeadline' | translate}}</strong> 
+    <span [ngStyle]="{ color: data.dueDateColor }">
+      {{ data.assignment.dueDate | date: 'dd.MM.yyyy' }}
+    </span>
+  </div>
+  <div><strong>{{'lblDiscipline' | translate}}</strong> {{ GetTranslation(data.assignment.discipline?.name) }}</div>
+  <div><strong>{{'lblTeacher' | translate}}</strong> {{ data.assignment.discipline?.teacher?.firstName }} {{ data.assignment.discipline?.teacher?.lastName }}</div>
+  <div><strong>{{'lblStatus' | translate}}</strong> {{ data.statusText }}</div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onClose()">{{'lblClose' | translate}}</button>
+</div>

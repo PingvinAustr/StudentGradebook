@@ -1,0 +1,18 @@
+.feed-item-container {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+}
+
+.feed-item-description {
+    padding: 20px;
+    font-size: 16px;
+}
+
+::ng-deep .sidebar-content {
+    overflow: scroll !important;
+}
+
+.feed-item-link {
+    font-size: 23px;
+}

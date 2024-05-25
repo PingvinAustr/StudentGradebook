@@ -17,6 +17,8 @@ public partial class StudentGradebookContext : DbContext
 
     public virtual DbSet<Assignment> Assignments { get; set; }
 
+    public virtual DbSet<AssignmentDetail> AssignmentDetails { get; set; }
+
     public virtual DbSet<Cafedra> Cafedras { get; set; }
 
     public virtual DbSet<Discipline> Disciplines { get; set; }
@@ -66,6 +68,26 @@ public partial class StudentGradebookContext : DbContext
                 .HasForeignKey(d => d.StudentId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Assignmen__Stude__45F365D3");
+        });
+
+        modelBuilder.Entity<AssignmentDetail>(entity =>
+        {
+            entity.HasKey(e => e.EntryId);
+
+            entity.Property(e => e.EntryId).HasColumnName("EntryID");
+            entity.Property(e => e.AssignmentId).HasColumnName("AssignmentID");
+            entity.Property(e => e.Description).HasColumnType("text");
+            entity.Property(e => e.FileAttachment1).HasMaxLength(500);
+            entity.Property(e => e.FileAttachment2).HasMaxLength(500);
+            entity.Property(e => e.FileAttachment3).HasMaxLength(500);
+            entity.Property(e => e.ImageAttachment1).HasMaxLength(500);
+            entity.Property(e => e.ImageAttachment2).HasMaxLength(500);
+            entity.Property(e => e.ImageAttachment3).HasMaxLength(500);
+
+            entity.HasOne(d => d.Assignment).WithMany(p => p.AssignmentDetails)
+                .HasForeignKey(d => d.AssignmentId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_AssignmentDetails_AssignmentDetails");
         });
 
         modelBuilder.Entity<Cafedra>(entity =>

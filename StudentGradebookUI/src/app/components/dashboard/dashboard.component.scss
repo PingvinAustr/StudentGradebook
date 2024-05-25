@@ -41,6 +41,11 @@
     box-shadow: 0px 2px 11.2px 0px rgba(0, 0, 0, 0.1) !important;
 }
 
+
+::ng-deep .dark-theme mat-sidenav-content {
+    background: #807b6f !important;
+}
+
 ::ng-deep mat-sidenav-container, mat-sidenav, body {
     background-color: rgba(225, 234, 248, 1) !important;
 }
@@ -48,6 +53,16 @@
 body {
     background-color: rgba(225, 234, 248, 1) !important;
 }
+
+::ng-deep .dark-theme {
+
+    mat-sidenav-container,
+    mat-sidenav,
+    body {
+        background-color: #454442 !important;
+    }
+}
+
 
 ::ng-deep mat-sidenav {
     width: 260px !important;
@@ -132,4 +147,36 @@ body {
 .selected-option {
     background-color: white;
     box-shadow: 0px 2px 11.2px 0px rgba(0, 0, 0, 0.1);
+}
+
+::ng-deep .dark-theme .selected-option {
+    background: #8f8b82 !important;
+}
+
+::ng-deep .dark-theme * {
+    color:white !important;
+}
+
+::ng-deep .dark-theme .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+    background-color: #807b6f !important;
+}
+
+::ng-deep .dark-theme .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+    background-color: #807b6f !important;
+}
+
+::ng-deep .dark-theme .mat-mdc-option.mdc-list-item {
+    background-color: #454442 !important
+}
+
+::ng-deep .dark-theme .logout-button {
+    background-color: #807b6f;
+}
+
+::ng-deep .dark-theme div.mat-mdc-select-panel {
+    background-color: #454442;
+}
+
+::ng-deep .dark-theme mat-calendar {
+    background-color: #454442 !important;
 }

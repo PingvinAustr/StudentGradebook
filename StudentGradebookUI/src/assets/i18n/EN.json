@@ -123,5 +123,17 @@
   "lblStudentRole": "Student",
   "lblTeacherRole": "Teacher",
   "lblGroupInText": "group",
-  "lblSessionTimeLine": "Exams timeline"
+  "lblSessionTimeLine": "Exams timeline",
+  "lblRSSFeed": "RSS Feed",
+  "lblENOnly": "RSS Feed provides only English version",
+  "lblGradebookStudentTitle": "My Grades",
+  "lblSemester": "Semester",
+  "lblAssignmentName": "Assignment Name:",
+  "lblDate":"Date",
+  "lblDeadline": "Deadline",
+  "lblStatus": "Status:",
+  "lblGradeTable": "Grade table",
+  "lblTodoList": "To Do",
+  "lblDueDate": "Due Date",
+  "lblDoneButNotGraded": "Done but not graded"
 }

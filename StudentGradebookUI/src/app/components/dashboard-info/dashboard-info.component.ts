@@ -18,6 +18,7 @@ import { TranslationService } from 'src/app/services/translation/translation-ser
 import { Assignment } from 'src/app/models/assignment.model';
 import { ChartOptions, DonutChartOptions, TimeLineChartOptions } from 'src/assets/charts.options';
 import { SemesterScheduleServiceService } from 'src/app/services/semester-control/semester-schedule-service.service';
+import { ThemeService } from 'src/app/services/theme/theme.service';
 
 @Component({
   selector: 'app-dashboard-info',
@@ -29,7 +30,8 @@ export class DashboardInfoComponent implements OnInit {
     private userService: UserService, 
     private disciplineService:DisciplineService,
     private translationService: TranslationService,
-    private semesterControlScheduleService: SemesterScheduleServiceService) { }
+    private semesterControlScheduleService: SemesterScheduleServiceService,
+    private themesService: ThemeService) { }
 
   currentUserName: string;
   ngOnInit(): void {
@@ -307,6 +309,11 @@ export class DashboardInfoComponent implements OnInit {
       },
       title: {
         text: this.translationService.translate('lblSessionTimeLine'),
+         style: {
+          fontSize: '18px',
+          fontFamily: 'NoirPro, sans-serif',
+          fontWeight: 500,
+        },
         align: "left"
       },
     };

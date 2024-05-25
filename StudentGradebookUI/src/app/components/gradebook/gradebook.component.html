@@ -1,1 +1,62 @@
-<p>gradebook works!</p>
+<div class="gradebook-page">
+    <span class="title">{{'lblGradebookStudentTitle' | translate}}</span>
+    <div class="blockuys">
+         <mat-tab-group mat-stretch-tabs (selectedIndexChange)="onTabChange($event)">
+            <mat-tab label="{{ 'lblTodoList' | translate }}">
+                 <div class="card-container">
+                    <mat-card>
+                        <mat-card-content>
+                            <div *ngFor="let assignment of todoAssignments; let i = index"  (click)="openToDoAssignment(assignment)">
+                                <div class="assignment column-data-header">
+                                    <span class="discipline-title-column data-title-column">{{ assignment.discipline.name | translate}}</span>
+                                    <div class="split">
+                                        <span class="assignment-title-column data-content-column">{{ assignment.name }}</span>
+                                        <div class="deadline-date">
+                                            <span>{{'lblDueDate' | translate}}</span>
+                                            <span class="grade">{{ FormatDate(assignment['dueDate']) }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="separator"></div>
+                                </div>
+                            </div>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+            </mat-tab>
+            <mat-tab label="{{ 'lblDoneButNotGraded' | translate }}">
+                sad
+            </mat-tab>
+         </mat-tab-group>
+    </div>
+    <div class="filterable-grid">
+        <mat-form-field appearance="fill">
+            <mat-label>{{"lblSemester" | translate}}</mat-label>
+            <mat-select [(value)]="selectedSemester" (selectionChange)="onSemesterChange($event)">
+            <mat-option *ngFor="let semester of semesters" [value]="semester">
+                {{ semester }}
+            </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <img src="./../../../assets/images/open-in-new.svg" style="width: 20px; margin-left: 15px" class="show-more-icon" (click)="openFullscreen()"/>
+
+        <div class="grid">
+            <table class="grade-table">
+                <thead>
+                <tr>
+                    <th class="heading">{{'lblDiscipline' | translate}}</th>
+                    <th class="heading" *ngFor="let date of uniqueDates">{{ date | date: 'dd.MM.yy' }}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let discipline of uniqueDisciplines">
+                    <td>{{ discipline.name | translate}}</td>
+                    <td *ngFor="let date of uniqueDates" [ngClass]="{'empty-cell': !getGrade(discipline.entryId, date) }"
+                    (click)="openGradeDetail(discipline.entryId, date)">
+                    {{ getGrade(discipline.entryId, date) }}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

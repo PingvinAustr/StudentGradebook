@@ -11,6 +11,7 @@ import { AnalyticsComponent } from '../analytics/analytics.component';
 import { TeacherAnalyticsComponent } from '../teacher-analytics/teacher-analytics.component';
 import { DashboardInfoTeacherComponent } from 'src/app/components/dashboard-info-teacher/dashboard-info-teacher.component';
 import { ThemeService } from 'src/app/services/theme/theme.service';
+import { RssFeedComponent } from '../rss/rssfeed.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -57,9 +58,19 @@ export class DashboardComponent {
         this.selectedComponent = this.currentUser['role'] === 1 ? AnalyticsComponent : TeacherAnalyticsComponent;
         break;
       }
+      case "rss": {
+        this.selectedComponent = RssFeedComponent;
+        break;
+      }
     }
   }
+  
+  NavigateToUserProfile() {
+    this.selectedOption = "user-profile";
+    this.selectedComponent = UserProfileComponent;
+  }
 
+  
   setLanguage(lang: string) {
     this.translationService.setCurrentLanguage(lang);
   }

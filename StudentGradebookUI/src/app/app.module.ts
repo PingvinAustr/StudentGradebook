@@ -50,6 +50,14 @@ import { LoadingService } from './services/loading/loading.service';
 import { LoadingInterceptor } from './interceptors/loading/loading.interceptor';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { RssFeedComponent } from './components/rss/rssfeed.component';
+import { RssFeedService } from './services/rss/rss-feed.service';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { PopoverConfig, PopoverModule } from 'ngx-bootstrap/popover';
+import { GradeDetailPopupComponent } from './components/grade-details-popup/grade-detail-popup/grade-detail-popup.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { FullscreenGradeTableComponent } from './components/fullscreen-grade-table/fullscreen-grade-table.component';
+import { TodDoAssignmentsPopupComponent } from './components/to-do-assignment-popup/to-do-assignment-popup.component';
 
 export function initApp(translationService: TranslationService) {
   return () => {
@@ -70,12 +78,17 @@ export function initApp(translationService: TranslationService) {
     DashboardInfoTeacherComponent,
     GradebookComponent,
     UserProfileComponent,
+    RssFeedComponent,
     PageNotFoundComponent,
     ErrorPageComponent,
+    GradeDetailPopupComponent,
+    FullscreenGradeTableComponent,
+    TodDoAssignmentsPopupComponent,
     TranslatePipe
   ],
 
   imports: [
+    PopoverModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
@@ -100,11 +113,15 @@ export function initApp(translationService: TranslationService) {
     MatCheckboxModule,
     NgApexchartsModule,
     MatProgressSpinnerModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatTooltipModule,
+    MatDialogModule
   ],
 
   providers: [
     CafedraService,
+    RssFeedService,
+    PopoverConfig,
     AuthService,
     GroupService,
     LoadingService,

@@ -25,6 +25,8 @@ public partial class Assignment
 
     public int? StatusId { get; set; }
 
+    public virtual ICollection<AssignmentDetail> AssignmentDetails { get; set; } = new List<AssignmentDetail>();
+
     public virtual Discipline Discipline { get; set; } = null!;
 
     public virtual Status? Status { get; set; }

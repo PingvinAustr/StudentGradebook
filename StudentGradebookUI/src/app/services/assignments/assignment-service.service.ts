@@ -22,6 +22,12 @@ export class AssignmentService {
         catchError(error => this.errorHandler.handleError(error))
     );
   }
+  
+  getToDoAssignmentsForStudent(studentId: number): Observable<Assignment[]> {
+    return this.http.get<Assignment[]>(`${this.apiUrl}/GetToDoForStudent/${studentId}`).pipe(
+        catchError(error => this.errorHandler.handleError(error))
+    );
+  }
 
   getAssignmentsForTeacher(teacherId: number, filters: any): Observable<Assignment[]> {
     return this.http.get<Assignment[]>(`${this.apiUrl}/ForTeacher/${teacherId}`, { params: filters, headers: this.headers  }).pipe(

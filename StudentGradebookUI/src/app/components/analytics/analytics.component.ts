@@ -171,7 +171,7 @@ export class AnalyticsComponent implements OnInit {
       },
       plotOptions: {
         heatmap: {
-          radius: series.length * 30,
+          radius: series.length * 20,
           enableShades: false,
           colorScale: {
             ranges: [
@@ -335,7 +335,7 @@ export class AnalyticsComponent implements OnInit {
       labels: Object.keys(disciplineCounts), 
       chart: {
         type: "polarArea",
-        height: '400px' 
+        height: '600px' 
       },
       stroke: {
         colors: ["#fff"]

@@ -32,7 +32,7 @@
   "lblLoginSuccessful": "Успішна авторизація",
   "lblLoginFailed": "Під час авторизація сталася помилка",
   "lblDashboard": "Головна",
-  "lblGradebook": "Оцінки",
+  "lblGradebook": "Оцінки та роботи",
   "lblUserProfile": "Мій профіль",
   "lblLogout": "Вийти",
   "lblPhone": "Телефон",
@@ -123,5 +123,17 @@
   "lblStudentRole": "Студент",
   "lblTeacherRole": "Викладач",
   "lblGroupInText": "група",
-  "lblSessionTimeLine": "Графік поточного семестру"
+  "lblSessionTimeLine": "Графік поточного семестру",
+  "lblRSSFeed": "Новини",
+  "lblENOnly": "Новини з RSS стрічки доступні лише англійською мовою",
+  "lblGradebookStudentTitle": "Мої оцінки та роботи",
+  "lblSemester": "Семестр",
+  "lblAssignmentName": "Завдання:",
+  "lblDate":"Дата:",
+  "lblDeadline": "Дедлайн:",
+  "lblStatus": "Статус:",
+  "lblGradeTable": "Оцінки за обраний семестр:",
+  "lblTodoList": "Треба виконати",
+  "lblDueDate": "Дедлайн",
+  "lblDoneButNotGraded": "Неоцінені виконані роботи"
 }

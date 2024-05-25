@@ -168,6 +168,11 @@ export class DashboardInfoTeacherComponent implements OnInit {
       },
       title: {
         text: this.translationService.translate('lblAssignmentsCountTitle'),
+         style: {
+          fontSize: '18px',
+          fontFamily: 'NoirPro, sans-serif',
+          fontWeight: 500
+        },
         align: "left"
       },
       grid: {

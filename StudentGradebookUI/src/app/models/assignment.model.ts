@@ -10,6 +10,7 @@ export interface Assignment {
   disciplineId: number;
   grade?: number;
   gradeDate?: Date;
+  dueDate?: Date;
   // Relationships
   discipline?: Discipline;
   student?: Student;

@@ -1,10 +1,10 @@
-<div>
+<div class="analytics-page">
   <mat-tab-group mat-stretch-tabs (selectedIndexChange)="onTabChange($event)">
     <mat-tab label="{{ 'lblAssignmentsQuantity' | translate }}">
     <div class="filters">
     <mat-slide-toggle [(ngModel)]="useDateRange" (onChange)="toggleDateUsage()">{{'lblSemestersDateMode' | translate}}</mat-slide-toggle>
 
-    <div *ngIf="useDateRange">
+    <div *ngIf="useDateRange" class="filter-couple">
     <mat-form-field appearance="fill">
       <mat-label>{{ 'lblDateFrom' | translate }}</mat-label>
       <input matInput [matDatepicker]="picker1" [(ngModel)]="generalTabDateFrom" [disabled]="!useDateRange">
@@ -20,7 +20,7 @@
     </mat-form-field>
   </div>
 
-   <div *ngIf="!useDateRange">
+   <div *ngIf="!useDateRange" class="filter-couple">
     <mat-form-field appearance="fill">
       <mat-label>{{'lblSelectYear' | translate}}</mat-label>
       <mat-select [(ngModel)]="selectedYear">
@@ -47,7 +47,7 @@
         {{ 'lblShowOnlyUngraded' | translate }}
      </mat-checkbox>
 
-      <button mat-raised-button color="primary" (click)="loadGeneralTabAssignments()">{{ 'lblApply' | translate }}</button>
+      <button class="apply-button" mat-raised-button color="primary" (click)="loadGeneralTabAssignments()">{{ 'lblApply' | translate }}</button>
     </div>
     <div class="chart-container" *ngIf="activeTabIndex === 0">
       <apx-chart
