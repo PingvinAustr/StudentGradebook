@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { GradeDetailPopupComponent } from '../grade-details-popup/grade-detail-popup/grade-detail-popup.component';
 import { FullscreenGradeTableComponent } from '../fullscreen-grade-table/fullscreen-grade-table.component';
 import { TodDoAssignmentsPopupComponent } from '../to-do-assignment-popup/to-do-assignment-popup.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-gradebook',
@@ -20,6 +21,7 @@ export class GradebookComponent implements OnInit {
     private assignmentService: AssignmentService,
     private userService: UserService,
     private dialog: MatDialog,
+     private snackBar: MatSnackBar
   ) { }
 
   semesters = [];
@@ -54,19 +56,25 @@ export class GradebookComponent implements OnInit {
 
   activeTabIndex: number = 0;
     onTabChange(index: number): void {
-      console.log(index);
       this.activeTabIndex = index;
       if (this.activeTabIndex === 0) {
-        console.log('a");')
         this.loadTodoAssignments();
+      } else if (this.activeTabIndex === 1) {
+        this.loadDoneNonCheckedAssignments();
       }
     }
 
   loadTodoAssignments() {
      const studentID = this.userService.getUser()['student'].entryId;
      this.assignmentService.getToDoAssignmentsForStudent(studentID).subscribe(data => {
-      console.log(data);
       this.todoAssignments = data;
+    });
+  }
+
+  loadDoneNonCheckedAssignments() {
+     const studentID = this.userService.getUser()['student'].entryId;
+     this.assignmentService.getDoneNonCheckedForStudent(studentID).subscribe(data => {
+      this.nonCheckedAssignments = data;
     });
   }
 
@@ -84,6 +92,7 @@ export class GradebookComponent implements OnInit {
   uniqueDates: any[] = [];
   assignments: Assignment[] = [];
   todoAssignments: Assignment[] = [];
+  nonCheckedAssignments: Assignment[] = [];
 
    onSemesterChange(semester: string) {
     if (semester['value']) {
@@ -205,8 +214,12 @@ export class GradebookComponent implements OnInit {
   }
 
   openToDoAssignment(assignment) {
+    if (assignment.assignmentDetails.length === 0) {
+      this.snackBar.open(this.translationService.translate('lblNoDataForAssignment'), this.translationService.translate('lblClose'), { duration: 3000 });
+      return;
+    }
     this.dialog.open(TodDoAssignmentsPopupComponent, {
-      width: '600px',
+      width: '85vw',
       data: {
         assignment: assignment
       }

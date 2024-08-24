@@ -5,7 +5,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './components/app-component/app.component';
 import { CafedraService } from './services/cafedra/cafedra.service';
 import { AuthService } from './services/auth/auth.service';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegistrationFormComponent } from './components/registration-form/registration-form.component';
 import { LoginComponent } from './components/login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -58,6 +58,9 @@ import { GradeDetailPopupComponent } from './components/grade-details-popup/grad
 import { MatDialogModule } from '@angular/material/dialog';
 import { FullscreenGradeTableComponent } from './components/fullscreen-grade-table/fullscreen-grade-table.component';
 import { TodDoAssignmentsPopupComponent } from './components/to-do-assignment-popup/to-do-assignment-popup.component';
+import { CarouselModule } from 'primeng/carousel';
+import { GradebookTeacherComponent } from './components/gradebook-teacher/gradebook-teacher.component';
+import { GradeStudentPopup } from './components/grade-student-popup/grade-student-popup.component';
 
 export function initApp(translationService: TranslationService) {
   return () => {
@@ -77,6 +80,7 @@ export function initApp(translationService: TranslationService) {
     DashboardInfoComponent,
     DashboardInfoTeacherComponent,
     GradebookComponent,
+    GradebookTeacherComponent,
     UserProfileComponent,
     RssFeedComponent,
     PageNotFoundComponent,
@@ -84,10 +88,13 @@ export function initApp(translationService: TranslationService) {
     GradeDetailPopupComponent,
     FullscreenGradeTableComponent,
     TodDoAssignmentsPopupComponent,
+    GradeStudentPopup,
     TranslatePipe
   ],
 
   imports: [
+    ReactiveFormsModule,
+    CarouselModule,
     PopoverModule,
     BrowserModule,
     AppRoutingModule,
@@ -115,7 +122,7 @@ export function initApp(translationService: TranslationService) {
     MatProgressSpinnerModule,
     MatProgressBarModule,
     MatTooltipModule,
-    MatDialogModule
+    MatDialogModule,
   ],
 
   providers: [

@@ -18,9 +18,8 @@ public class CpuHealthCheck : IHealthCheck
     {
         var cpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_Total");
 
-        // First call always returns 0
         cpuCounter.NextValue();
-        await Task.Delay(500); // Wait for half a second
+        await Task.Delay(500); 
 
         var value = cpuCounter.NextValue();
         var status = value < _threshold ? HealthStatus.Healthy : HealthStatus.Unhealthy;

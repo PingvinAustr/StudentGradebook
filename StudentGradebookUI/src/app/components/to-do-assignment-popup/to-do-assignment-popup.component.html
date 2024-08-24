@@ -1,7 +1,36 @@
 <h1 mat-dialog-title>{{ data.assignment.name }}</h1>
 <div mat-dialog-content>
-  {{data.assignment.name}}
-</div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onClose()">{{'lblClose' | translate}}</button>
+  <div> <span class="descriptive"> {{'lblDeadline' | translate}}</span><span class="non-descriptive" [ngStyle]="{'color': isDueDateOverdue(data.assignment.dueDate) ? 'red' : 'green'}"> {{ (data.assignment.dueDate | date: 'dd.MM.yyyy') }}</span></div>
+  <p><span class="descriptive">{{'lblDiscipline' | translate}}: </span> <span class="non-descriptive">{{ data.assignment.discipline.name | translate}}</span></p>
+  <div *ngIf="data.assignment.assignmentDetails.length > 0">
+    <p class="descriptive">{{'lblAssignmentName' | translate}}</p>
+    <p class="non-descriptive" style="white-space: pre;">{{ data.assignment.assignmentDetails[0].description | translate}}</p>
+    <div *ngIf="hasImages(data.assignment.assignmentDetails[0])">
+      <p-carousel 
+          [value]="images" 
+          [numVisible]="1" 
+          [numScroll]="1" 
+          [showIndicators]="false"
+          [showNavigators]="true"
+          [circular]="true">
+        <ng-template let-image pTemplate="item">
+          <img [src]="image" alt="Assignment Image" class="carousel-image"/>
+        </ng-template>
+      </p-carousel>
+    </div>
+    <div *ngIf="hasFiles(data.assignment.assignmentDetails[0])" class="attachments-container">
+      <p>{{'lblAttachments' | translate}}</p>
+      <div class="attachments-group">
+        <a *ngIf="data.assignment.assignmentDetails[0].fileAttachment1" [href]="data.assignment.assignmentDetails[0].fileAttachment1" download>
+          <img class="attachmentImage" src="./../../../assets/images/paperclip.svg"/>
+        </a>
+        <a *ngIf="data.assignment.assignmentDetails[0].fileAttachment2" [href]="data.assignment.assignmentDetails[0].fileAttachment2" download>
+          <img class="attachmentImage" src="./../../../assets/images/paperclip.svg"/>
+        </a>
+        <a *ngIf="data.assignment.assignmentDetails[0].fileAttachment3" [href]="data.assignment.assignmentDetails[0].fileAttachment3" download>
+          <img class="attachmentImage" src="./../../../assets/images/paperclip.svg"/>
+        </a>
+      </div>
+    </div>
+  </div>
 </div>

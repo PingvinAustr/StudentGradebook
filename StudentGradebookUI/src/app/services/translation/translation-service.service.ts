@@ -7,7 +7,7 @@ import { catchError, map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class TranslationService {
-  public currentLang: string = 'EN'; // Default language
+  public currentLang: string = 'EN'; 
   private translations: any = {};
 
   public Languages = [
@@ -23,9 +23,9 @@ export class TranslationService {
     const storedLang = localStorage.getItem('appLang');
     if (storedLang) {
       this.currentLang = storedLang;
-      this.loadTranslations(storedLang).subscribe(); // Pre-load translations
+      this.loadTranslations(storedLang).subscribe(); 
     } else {
-      this.setCurrentLanguage(this.currentLang); // Set default language if none in storage
+      this.setCurrentLanguage(this.currentLang); 
     }
   }
 

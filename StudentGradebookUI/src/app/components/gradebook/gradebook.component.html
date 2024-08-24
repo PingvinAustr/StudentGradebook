@@ -6,7 +6,7 @@
                  <div class="card-container">
                     <mat-card>
                         <mat-card-content>
-                            <div *ngFor="let assignment of todoAssignments; let i = index"  (click)="openToDoAssignment(assignment)">
+                            <div *ngFor="let assignment of todoAssignments; let i = index" (click)="openToDoAssignment(assignment)" class="single-assignment">
                                 <div class="assignment column-data-header">
                                     <span class="discipline-title-column data-title-column">{{ assignment.discipline.name | translate}}</span>
                                     <div class="split">
@@ -24,7 +24,25 @@
                 </div>
             </mat-tab>
             <mat-tab label="{{ 'lblDoneButNotGraded' | translate }}">
-                sad
+                <div class="card-container">
+                    <mat-card>
+                        <mat-card-content>
+                            <div *ngFor="let assignment of nonCheckedAssignments; let i = index" (click)="openToDoAssignment(assignment)" class="single-assignment">
+                                <div class="assignment column-data-header">
+                                    <span class="discipline-title-column data-title-column">{{ assignment.discipline.name | translate}}</span>
+                                    <div class="split">
+                                        <span class="assignment-title-column data-content-column">{{ assignment.name }}</span>
+                                        <div class="deadline-date">
+                                            <span>{{'lblDueDate' | translate}}</span>
+                                            <span class="grade">{{ FormatDate(assignment['dueDate']) }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="separator"></div>
+                                </div>
+                            </div>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
             </mat-tab>
          </mat-tab-group>
     </div>

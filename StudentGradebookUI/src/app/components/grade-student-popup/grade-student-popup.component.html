@@ -1,0 +1,22 @@
+<h1 mat-dialog-title>{{ data.assignment.name }}</h1>
+<div mat-dialog-content>
+  <div><strong>{{'lblAssignmentName' | translate}}</strong> <p class="black" style="color: black">{{ data.assignment.name }}</p></div>
+  <div>
+    <strong>{{'lblDeadline' | translate}}</strong> 
+    <span [ngStyle]="{ color: data.dueDateColor }">
+      <p class="black" style="color: black">{{ data.assignment.dueDate | date: 'dd.MM.yyyy' }}</p>
+    </span>
+  </div>
+  <div *ngIf="!gridMode"><strong>{{'lblDiscipline' | translate}}</strong> <p class="black" style="color: black">{{ GetTranslation(data.assignment.discipline?.name) }}</p></div>
+  <div><strong>{{'lblStudent' | translate}}</strong> <p class="black" style="color: black">{{ data.assignment?.student?.firstName }} {{ data.assignment.student?.lastName }} - <span *ngIf="!gridMode">{{data.assignment.student.group.name}}</span></p></div>
+   <div>
+    <mat-form-field>
+      <mat-label>{{ 'lblGrade' | translate }}</mat-label>
+      <input matInput type="number" [(ngModel)]="gradeValue" min="0" max="100">
+    </mat-form-field>
+    <button mat-button (click)="gradeAssignment()">{{'lblGradeIt' | translate}}</button>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onClose()">{{'lblClose' | translate}}</button>
+</div>

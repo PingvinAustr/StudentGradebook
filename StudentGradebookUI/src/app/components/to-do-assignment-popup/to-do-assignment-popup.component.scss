@@ -1,0 +1,31 @@
+.carousel-image {
+    width: 400px;
+    height: 400px;
+}
+
+::ng-deep .p-carousel-item {
+    display: flex;
+    align-self: center;
+    justify-content: center;
+}
+
+.non-descriptive {
+    color: black;
+}
+
+.attachmentImage {
+    width: 30px;
+}
+
+.attachments-container {
+    display: flex;
+    flex-direction: row;
+
+    p {
+        width: fit-content;
+    }
+}
+
+.attachments-group {
+    margin-left: 10px;
+}

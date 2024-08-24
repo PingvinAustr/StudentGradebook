@@ -29,8 +29,33 @@ export class AssignmentService {
     );
   }
 
+  getDoneNonCheckedForStudent(studentId: number): Observable<Assignment[]> {
+    return this.http.get<Assignment[]>(`${this.apiUrl}/GetDoneNonCheckedForStudent/${studentId}`).pipe(
+        catchError(error => this.errorHandler.handleError(error))
+    );
+  }
+
+  gradeAssignment(assignmentId: number, filters: any): Observable<Assignment[]> {
+    return this.http.get<Assignment[]>(`${this.apiUrl}/GradeAssignment/${assignmentId}`, { params: filters, headers: this.headers  }).pipe(
+        catchError(error => this.errorHandler.handleError(error))
+    );
+  }
+
   getAssignmentsForTeacher(teacherId: number, filters: any): Observable<Assignment[]> {
     return this.http.get<Assignment[]>(`${this.apiUrl}/ForTeacher/${teacherId}`, { params: filters, headers: this.headers  }).pipe(
+        catchError(error => this.errorHandler.handleError(error))
+    );
+  };
+
+  getGridForTeacher(teacherId: number, filters: any): Observable<Assignment[]> {
+    return this.http.get<Assignment[]>(`${this.apiUrl}/GridForTeacher/${teacherId}`, { params: filters, headers: this.headers  }).pipe(
+        catchError(error => this.errorHandler.handleError(error))
+    );
+  };
+
+  getToCheckAssignmentsForTeacher(teacherId: number): Observable<Assignment[]> {
+    console.log(teacherId);
+    return this.http.get<Assignment[]>(`${this.apiUrl}/GetToCheckForTeacher/${teacherId}`).pipe(
         catchError(error => this.errorHandler.handleError(error))
     );
   };

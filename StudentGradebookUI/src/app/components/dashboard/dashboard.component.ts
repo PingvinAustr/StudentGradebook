@@ -12,6 +12,7 @@ import { TeacherAnalyticsComponent } from '../teacher-analytics/teacher-analytic
 import { DashboardInfoTeacherComponent } from 'src/app/components/dashboard-info-teacher/dashboard-info-teacher.component';
 import { ThemeService } from 'src/app/services/theme/theme.service';
 import { RssFeedComponent } from '../rss/rssfeed.component';
+import { GradebookTeacherComponent } from '../gradebook-teacher/gradebook-teacher.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -47,7 +48,7 @@ export class DashboardComponent {
         break;
       }
       case "gradebook": {
-        this.selectedComponent = GradebookComponent;
+        this.selectedComponent = this.currentUser['role'] === 1 ? GradebookComponent : GradebookTeacherComponent;
         break;
       }
       case "user-profile": {

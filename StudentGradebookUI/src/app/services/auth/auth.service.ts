@@ -23,8 +23,8 @@ export class AuthService {
   login(username: string, password: string): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/login`, { username, password }).pipe(
       tap(response => {
-        localStorage.setItem('jwtToken', response.token); // Store JWT separately for easier access
-        localStorage.setItem('user', JSON.stringify(response)); // Storing the rest of the user details
+        localStorage.setItem('jwtToken', response.token); 
+        localStorage.setItem('user', JSON.stringify(response));
       })
     );
   }
@@ -42,7 +42,7 @@ export class AuthService {
 
   isAuthenticated(): boolean {
     const token = this.getToken();
-    return !!token; // Here you might want to check if the token is expired using a library like jwt-decode
+    return !!token; 
   }
 
   registerStudent(student: any): Observable<any> {

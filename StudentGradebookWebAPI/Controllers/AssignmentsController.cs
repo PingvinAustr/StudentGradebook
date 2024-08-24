@@ -23,6 +23,25 @@ namespace StudentGradebookWebAPI.Controllers
             _memoryCache = memoryCache;
         }
 
+        [Auth]
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Assignment>>> GetAssignments()
+        {
+            const string cacheKey = "AssignmentsList";
+            if (!_memoryCache.TryGetValue(cacheKey, out List<Assignment> cachedData))
+            {
+                cachedData = await _context.Assignments.ToListAsync();
+                var cacheExpiryOptions = new MemoryCacheEntryOptions
+                {
+                    AbsoluteExpiration = DateTime.Now.AddMinutes(5),
+                    Priority = CacheItemPriority.High,
+                    SlidingExpiration = TimeSpan.FromMinutes(2)
+                };
+                _memoryCache.Set(cacheKey, cachedData, cacheExpiryOptions);
+            }
+            return Ok(cachedData);
+        }
+
         // GET: api/Assignments/ForStudent/5
         [Auth]
         [HttpGet("ForStudent/{studentId}")]
@@ -115,6 +134,19 @@ namespace StudentGradebookWebAPI.Controllers
 
         // GET: api/Assignments/ForTeacher/5
         [Auth]
+        [HttpGet("GridForTeacher/{teacherId}")]
+        public async Task<ActionResult<IEnumerable<Assignment>>> GetGridForTeacher(int teacherId, [FromQuery] DateTime? dateFrom, [FromQuery] DateTime? dateTo, [FromQuery] int disciplineId, [FromQuery] int groupId)
+        {
+            var query = _context.Assignments.Where(a => a.Discipline.TeacherId == teacherId 
+            && a.DisciplineId == disciplineId 
+            && ((a.GradeDate >= dateFrom && a.GradeDate <= dateTo) || a.GradeDate == null)
+            && a.Student.GroupId == groupId);
+
+            return await query.Include(a => a.Student).ToListAsync();
+        }
+
+        // GET: api/Assignments/ForTeacher/5
+        [Auth]
         [HttpGet("AllForTeacher/{teacherId}")]
         public async Task<ActionResult<IEnumerable<Assignment>>> GetAllAssignmentsForTeacher(int teacherId)
         {
@@ -167,25 +199,7 @@ namespace StudentGradebookWebAPI.Controllers
             return assignments;
         }
 
-        // GET: api/Assignments
-        [Auth]
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Assignment>>> GetAssignments()
-        {
-            const string cacheKey = "AssignmentsList";
-            if (!_memoryCache.TryGetValue(cacheKey, out List<Assignment> cachedData))
-            {
-                cachedData = await _context.Assignments.ToListAsync();
-                var cacheExpiryOptions = new MemoryCacheEntryOptions
-                {
-                    AbsoluteExpiration = DateTime.Now.AddMinutes(5),
-                    Priority = CacheItemPriority.High,
-                    SlidingExpiration = TimeSpan.FromMinutes(2)
-                };
-                _memoryCache.Set(cacheKey, cachedData, cacheExpiryOptions);
-            }
-            return Ok(cachedData);
-        }
+        
 
         // GET: api/Assignments/5
         [Auth]
@@ -273,9 +287,43 @@ namespace StudentGradebookWebAPI.Controllers
         [HttpGet("GetToDoForStudent/{studentId}")]
         public async Task<ActionResult<IEnumerable<Assignment>>> GetTodoAssignmentsForStudent(int studentId)
         {
-            var query = _context.Assignments.Where(a => a.StudentId == studentId && a.GradeDate == null);
+            var query = _context.Assignments.Where(a => a.StudentId == studentId && a.GradeDate == null && (a.StatusId == 2 || a.StatusId == 3));
 
             return await query.Include(a => a.Discipline).ThenInclude(x => x.Teacher).Include(x=>x.AssignmentDetails).ToListAsync();
+        }
+
+        // GET: api/Assignments/GetDoneNonCheckedForStudent/5
+        [Auth]
+        [HttpGet("GetDoneNonCheckedForStudent/{studentId}")]
+        public async Task<ActionResult<IEnumerable<Assignment>>> GetDoneNonCheckedForStudentAssignmentsForStudent(int studentId)
+        {
+            var query = _context.Assignments.Where(a => a.StudentId == studentId && a.GradeDate == null && a.StatusId == 1);
+
+            return await query.Include(a => a.Discipline).ThenInclude(x => x.Teacher).Include(x => x.AssignmentDetails).ToListAsync();
+        }
+
+        // GET: api/Assignments/GetToCheckAssignmentsForTeacher/5
+        [Auth]
+        [HttpGet("GetToCheckForTeacher/{teacherId}")]
+        public async Task<ActionResult<IEnumerable<Assignment>>> GetToCheckAssignmentsForTeacher(int teacherId)
+        {
+            var query = _context.Assignments.Where(a => a.Discipline.TeacherId == teacherId && a.GradeDate == null);
+
+            return await query.Include(a => a.Discipline).Include(x => x.Student).ThenInclude(x => x.Group).ToListAsync();
+        }
+
+        [Auth]
+        [HttpGet("GradeAssignment/{assignmentId}")]
+        public async Task<ActionResult<IEnumerable<Assignment>>> GradeAssignment(int assignmentId, int grade)
+        {
+            var assignmentToGrade = _context.Assignments.Where(x => x.EntryId == assignmentId).FirstOrDefault();
+            assignmentToGrade.Grade = grade;
+            assignmentToGrade.GradeDate = DateTime.Now;
+            assignmentToGrade.StatusId = 4;
+            _context.Assignments.Update(assignmentToGrade);
+            _context.SaveChangesAsync();
+
+            return Ok();
         }
     }
 }

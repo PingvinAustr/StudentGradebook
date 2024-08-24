@@ -37,7 +37,7 @@
     padding-top: 10px !important;
 }
 
-::ng-deep .gradebook-page{
+::ng-deep .gradebook-page {
     .mat-mdc-select {
         padding-top: 0px !important;
     }
@@ -57,7 +57,7 @@
 
 table {
     border-spacing: 0;
-    table-layout:fixed !important;
+    table-layout: fixed !important;
 }
 
 td {
@@ -96,9 +96,7 @@ td:not(:first-child):not(.empty-cell):hover {
     opacity: 0.45;
 }
 
-.card-container {
-
-}
+.card-container {}
 
 ::ng-deep mat-card-header {
     background: unset !important;
@@ -157,6 +155,11 @@ td:not(:first-child):not(.empty-cell):hover {
     flex-direction: column;
 }
 
+.student-info {
+    display: flex;
+    flex-direction: column;
+}
+
 
 .single-assignment {
     cursor: pointer;
@@ -167,4 +170,26 @@ td:not(:first-child):not(.empty-cell):hover {
 
 .single-assignment:hover {
     background-color: rgba(221, 227, 237, 0.48);
+}
+
+.row-extra-info {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.grade-check {
+    transition: .5s;
+}
+
+.grade-check:hover {
+    opacity: .5;
+}
+
+.grid-filters {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+    //justify-content: center;
 }
